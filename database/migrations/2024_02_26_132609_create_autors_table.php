@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('autors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 100);
+            $table->string('nome', 100);
             $table->string('apelido', 100);
             $table->string('cidade', 50);
             $table->string('bairro', 50);

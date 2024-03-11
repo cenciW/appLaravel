@@ -43,9 +43,24 @@ class AutorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $registro = $request->all();
+
+        $autor = $this -> repository -> find($id);
+
+        // $autor['nome'] = $registro['nome'];
+        // $autor['apelido'] = $registro['apelido'];
+        // $autor['cidade'] = $registro['cidade'];
+        // $autor['bairro'] = $registro['bairro'];
+        // $autor['cep'] = $registro['cep'];
+        // $autor['email'] = $registro['email'];
+        // $autor['telefone'] = $registro['telefone'];
+        
+        $autor->update($registro);
+
+
+        dd($registro);
     }
 
     /**

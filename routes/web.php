@@ -21,16 +21,19 @@ Route::get('/', function () {
 
 //Chamando rota para usar o controller.
 //Listar geral
-Route::get('/autor/index',[AutorController::class,'index']);
+Route::get('/autor/index',[AutorController::class,'index'])->name('autor.index');
 
 //Criar
-Route::get('/autor/create',[AutorController::class,'create']);
+Route::get('/autor/create',[AutorController::class,'create'])->name('autor.create');
 
 //Editar
-Route::get('/autor/edit/{id}',[AutorController::class,'edit']);
+Route::get('/autor/edit/{id}',[AutorController::class,'edit'])->name('autor.edit');
 
 //Deletar
-Route::get('/autor/destroy/{id}',[AutorController::class,'destroy']);
+Route::get('/autor/destroy/{id}',[AutorController::class,'destroy'])->name('autor.destroy');
 
 //Listar com id
-Route::get('/autor/show/{id}',[AutorController::class,'show']);
+Route::get('/autor/show/{id}',[AutorController::class,'show'])->name('autor.show');
+
+//Salvar
+Route::post('/autor/store/{id}',[AutorController::class,'store'])->name('autor.store');
