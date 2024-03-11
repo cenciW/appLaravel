@@ -29,11 +29,16 @@ Route::get('/autor/create',[AutorController::class,'create'])->name('autor.creat
 //Editar
 Route::get('/autor/edit/{id}',[AutorController::class,'edit'])->name('autor.edit');
 
-//Deletar
-Route::get('/autor/destroy/{id}',[AutorController::class,'destroy'])->name('autor.destroy');
-
 //Listar com id
 Route::get('/autor/show/{id}',[AutorController::class,'show'])->name('autor.show');
 
+//criando o get para o delete
+Route::get('/autor/delete/{id}',[AutorController::class,'delete'])->name('autor.delete');
+
+//url esquerda ----- urn na direita
 //Salvar
-Route::post('/autor/store/{id}',[AutorController::class,'store'])->name('autor.store');
+Route::post('/autor/store',[AutorController::class,'store'])->name('autor.store');
+//update
+Route::post('/autor/update/{id}',[AutorController::class,'update'])->name('autor.update');
+//Deletar
+Route::post('/autor/destroy/{id}',[AutorController::class,'destroy'])->name('autor.destroy');

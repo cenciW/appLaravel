@@ -7,7 +7,7 @@
 </head>
 <body>
     <div>
-        <form action="{{url('autor/store', $registro->id) }}" method="POST">
+        <form action="{{route('autor.update', $registro->id) }}" method="POST">
             @csrf
             <div>
                 <Label for="">Nome</Label>
