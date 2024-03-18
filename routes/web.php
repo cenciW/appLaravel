@@ -19,26 +19,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Chamando rota para usar o controller.
-//Listar geral
-Route::get('/autor/index',[AutorController::class,'index'])->name('autor.index');
+Route::prefix('autor')->group(function(){
 
-//Criar
-Route::get('/autor/create',[AutorController::class,'create'])->name('autor.create');
+    //Chamando rota para usar o controller.
+    //Listar geral
+    Route::get('/index',[AutorController::class,'index'])->name('autor.index');
 
-//Editar
-Route::get('/autor/edit/{id}',[AutorController::class,'edit'])->name('autor.edit');
+    //Criar
+    Route::get('/create',[AutorController::class,'create'])->name('autor.create');
 
-//Listar com id
-Route::get('/autor/show/{id}',[AutorController::class,'show'])->name('autor.show');
+    //Editar
+    Route::get('/edit/{id}',[AutorController::class,'edit'])->name('autor.edit');
 
-//criando o get para o delete
-Route::get('/autor/delete/{id}',[AutorController::class,'delete'])->name('autor.delete');
+    //Listar com id
+    Route::get('/show/{id}',[AutorController::class,'show'])->name('autor.show');
 
-//url esquerda ----- urn na direita
-//Salvar
-Route::post('/autor/store',[AutorController::class,'store'])->name('autor.store');
-//update
-Route::post('/autor/update/{id}',[AutorController::class,'update'])->name('autor.update');
-//Deletar
-Route::post('/autor/destroy/{id}',[AutorController::class,'destroy'])->name('autor.destroy');
+    //criando o get para o delete
+    Route::get('/delete/{id}',[AutorController::class,'delete'])->name('autor.delete');
+
+    //url esquerda ----- urn na direita
+    //Salvar
+    Route::post('/store',[AutorController::class,'store'])->name('autor.store');
+    //update
+    Route::post('/update/{id}',[AutorController::class,'update'])->name('autor.update');
+    //Deletar
+    Route::post('/destroy/{id}',[AutorController::class,'destroy'])->name('autor.destroy');
+});
