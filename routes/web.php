@@ -40,9 +40,11 @@ Route::prefix('autor')->group(function(){
     //url esquerda ----- urn na direita
     //Salvar
     Route::post('/store',[AutorController::class,'store'])->name('autor.store');
+    
     //Deletar
-    Route::post('/destroy/{id}',[AutorController::class,'destroy'])->name('autor.destroy');
-
+    Route::delete('/destroy/{id}',[AutorController::class,'destroy'])->name('autor.destroy');
     //update
     Route::put('/update/{id}',[AutorController::class,'update'])->name('autor.update');
+
+
 });
