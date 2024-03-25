@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AutorFormRequest extends FormRequest
 {
@@ -21,7 +22,8 @@ class AutorFormRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        
+        $rules = [
             'nome' => 'required',
             'apelido' => 'required',
             'cidade'=> 'required',
@@ -31,16 +33,17 @@ class AutorFormRequest extends FormRequest
             'telefone'=> 'required',
         ];
 
-        if($this->method() == 'POST'){
+        if($this->method() == 'PUT'){
             $rules['email'] = [
-                'required'
+                'required',
+                Rule::unique('autors')->ignore($this->id)
             ];
         }
-        
+
         return $rules;
     }
 
-    public function messages(){
+    public function messages(): array{
         return [
             'nome' => 'O campo :attribute é obrigatório',
             'apelido' => 'O campo :attribute é obrigatório',

@@ -43,7 +43,6 @@ Route::prefix('autor')->group(function(){
     //Deletar
     Route::post('/destroy/{id}',[AutorController::class,'destroy'])->name('autor.destroy');
 
-
     //update
     Route::put('/update/{id}',[AutorController::class,'update'])->name('autor.update');
 });
