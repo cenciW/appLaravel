@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AutorFormRequest;
 use App\Models\Autor;
 use App\Services\AutorService;
 use App\Services\AutorServiceInterface;
@@ -13,9 +14,12 @@ class AutorController extends Controller
 {
     // faça a injeção de dependência do context
     private $service;
-    public function __construct(AutorServiceInterface $service)
+    //private $autor;
+    public function __construct(AutorServiceInterface $service/*, Autor $autor*/)
     {
+
         $this->service = $service;
+        //$this->autor = $autor;
     }
 
 
@@ -47,10 +51,16 @@ class AutorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AutorFormRequest $request)
     {
-        //$registro = $request->all();
+        #validar o campo antes de efetivamente criar
+        /*$request ->validate(
+            $this->autor->rules(),
+            $this->autor->feedback()
+        );  removendo isso aqui pra fazer a requisicao de outra maneira*/
+
         $this->service->store($request);
+        
         //mostrar o registro dentro do request
         //dd("criando um registro");
 
@@ -92,7 +102,7 @@ class AutorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AutorFormRequest $request, string $id)
     {
     
         $this -> service -> update($request, $id);

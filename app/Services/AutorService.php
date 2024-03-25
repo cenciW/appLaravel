@@ -22,10 +22,6 @@ class AutorService implements AutorServiceInterface{
     
     //salvar
     public function store(Request $request){
-        #validar o campo antes de efetivamente criar
-        $request ->validate([
-            $this->repository->rules(),
-        ]);
 
         $this->repository->create($request->all());
     }
