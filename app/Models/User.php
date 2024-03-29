@@ -10,28 +10,31 @@ class User extends Model
     use HasFactory;
 
     protected $table = "users";
-    
+
     protected $fillable = [
-        "name","email","password","dt_created","uuid"];
+        "name", "email", "password", "dt_created", "uuid"];
 
     #definir regras para esse model
-    public function rules(){
+    #user rules
+    public function rules()
+    {
         return [
             'name' => 'required',
             'email' => 'required',
-            'password'=> 'required',
-            'dt_created'=> 'required',
-            'uuid'=> 'required',
+            'password' => 'required',
+            'dt_created' => 'required',
+            'uuid' => 'required',
         ];
     }
 
-    public function feedback(){
+    public function feedback()
+    {
         return [
             'name' => 'O campo :attribute é obrigatório',
             'email' => 'O campo :attribute é obrigatório',
-            'password'=> 'O campo :attribute é obrigatório',
-            'dt_created'=> 'O campo :attribute é obrigatório',
-            'uuid'=> 'O campo :attribute é obrigatório',
+            'password' => 'O campo :attribute é obrigatório',
+            'dt_created' => 'O campo :attribute é obrigatório',
+            'uuid' => 'O campo :attribute é obrigatório',
         ];
     }
 }

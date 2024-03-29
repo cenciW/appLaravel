@@ -22,33 +22,34 @@ class UserFormRequest extends FormRequest
      */
     public function rules(): array
     {
-        
+
         $rules = [
             'name' => 'required',
             'email' => 'required|unique:autors',
-            'password'=> 'required',
-            'dt_created'=> 'required',
-            'uuid'=> 'required',
+            'password' => 'required',
+            'dt_created' => 'required',
+            'uuid' => 'required',
         ];
 
-
-        if($this->method() == 'PUT'){
+        if ($this->method() == 'PUT') {
             $rules['email'] = [
                 'required',
-                Rule::unique('users')->ignore($this->id)
+                Rule::unique('users')->ignore($this->id),
             ];
         }
 
         return $rules;
     }
 
-    public function messages(): array{
+    public function messages(): array
+    {
         return [
             'name' => 'O campo :attribute é obrigatório',
             'email' => 'O campo :attribute é obrigatório',
-            'password'=> 'O campo :attribute é obrigatório',
-            'dt_created'=> 'O campo :attribute é obrigatório',
-            'uuid'=> 'O campo :attribute é obrigatório',
+            'password' => 'O campo :attribute é obrigatório',
+            'dt_created' => 'O campo :attribute é obrigatório',
+            'uuid' => 'O campo :attribute é obrigatório',
         ];
     }
+
 }

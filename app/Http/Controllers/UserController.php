@@ -3,12 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AutorFormRequest;
-use App\Models\Autor;
-use App\Services\AutorService;
-use App\Services\AutorServiceInterface;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-
 
 class UserController extends Controller
 {
@@ -22,7 +17,6 @@ class UserController extends Controller
         //$this->autor = $autor;
     }
 
-
     /**
      * Display a listing of the resource.
      */
@@ -31,11 +25,11 @@ class UserController extends Controller
         //dd('acessando o controller autor controller - index');
 
         //essa variavel service eu criei no construtor e atribui o valor do model
-        $registros =  $this->service->index(10);
+        $registros = $this->service->index(10);
         //$registros = Autor::paginate(10);
 
         return view('user.index', [
-            'registros'=> $registros['registros'],
+            'registros' => $registros['registros'],
         ]);
     }
 
@@ -55,12 +49,12 @@ class UserController extends Controller
     {
         #validar o campo antes de efetivamente criar
         /*$request ->validate(
-            $this->autor->rules(),
-            $this->autor->feedback()
+        $this->autor->rules(),
+        $this->autor->feedback()
         );  removendo isso aqui pra fazer a requisicao de outra maneira*/
 
         $this->service->store($request);
-        
+
         //mostrar o registro dentro do request
         //dd("criando um registro");
 
@@ -75,7 +69,7 @@ class UserController extends Controller
         $registro = $this->service->show($id);
         return view('user.show', [
             'registro' => $registro['registro'],
-        ]);        
+        ]);
 
     }
 
@@ -89,13 +83,12 @@ class UserController extends Controller
 
         //Validação para caso o registro não exista
         //if(!$registro){
-          //  return redirect()->back();
+        //  return redirect()->back();
         //}
 
         return view('user.edit', [
-            'registro'=> $registro['registro'],
+            'registro' => $registro['registro'],
         ]);
-
 
     }
 
@@ -104,17 +97,18 @@ class UserController extends Controller
      */
     public function update(AutorFormRequest $request, string $id)
     {
-    
-        $this -> service -> update($request, $id);
+
+        $this->service->update($request, $id);
         return redirect()->route('user.index');
 
     }
 
-    public function delete(string $id){
-        $registro = $this ->service -> show($id);
+    public function delete(string $id)
+    {
+        $registro = $this->service->show($id);
 
         return view('user.destroy', [
-            'registro'=> $registro['registro'],
+            'registro' => $registro['registro'],
         ]);
     }
 
@@ -123,7 +117,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $this ->service -> destroy($id);
+        $this->service->destroy($id);
         return redirect()->route('user.index');
     }
+
 }
