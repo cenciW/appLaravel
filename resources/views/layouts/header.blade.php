@@ -1,5 +1,8 @@
-<header class="app-header"><a class="app-header__logo" href="index.html">Proj Manag Sys</a>
-    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+<header class="app-header"><a class="app-header__logo" href="index.html">Project System</a>
+    <!-- Sidebar toggle button-->
+    <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar">
+        <img src="appLaravel/resources/icons/icons8-mostrar-sidepanel-50.png" alt="Toggle Sidebar">
+    </a>
     <!-- Navbar Right Menu-->
     <ul class="app-nav">
         <!-- User Menu-->

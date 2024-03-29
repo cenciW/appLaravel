@@ -11,6 +11,7 @@ class ServicesProvider extends ServiceProvider
     //relacionar Interface com Service
     public array $bindings = [
         AutorServiceInterface::class => AutorService::class,
+        UserServiceInterface::class => UserService::class,
     ];
 
 

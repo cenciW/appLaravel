@@ -28,10 +28,6 @@
         @include('layouts.footer')
     </footer>
 
-
-
-
-
     <!-- sempre que for script colocar no body -->
     <script src="{{ asset('js/jquery-3.7.0.min.js')}}"></script>
     <script src="{{ asset('js/bootstrap.min.js')}}"></script>
