@@ -12,7 +12,8 @@ class ServicesProvider extends ServiceProvider
     public array $bindings = [
         AutorServiceInterface::class => AutorService::class,
         UserServiceInterface::class => UserService::class,
-        ProjectServiceInterface::class => ProjectService::class
+        ProjectServiceInterface::class => ProjectService::class,
+        CardServiceInterface::class => CardService::class
     ];
 
 
