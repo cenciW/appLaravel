@@ -19,6 +19,8 @@ class Card extends Model
     public function project() {
         return $this->belongsTo(Project::class);
     }
+
+    
     #definir regras para esse model
     #user rules
     public function rules()

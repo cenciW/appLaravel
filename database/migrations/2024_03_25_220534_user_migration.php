@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('password', 255); // Update the length of the password column
             $table->date('dt_created');
             $table->string('uuid', 36); // Update the length of the uuid column
-            $table->timestamps();
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('users_personal');
     }
 };
