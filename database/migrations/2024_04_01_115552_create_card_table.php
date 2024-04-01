@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('dt_created'); 
             $table->unsignedInteger('project_id'); 
             $table->foreign('project_id')->references('id')->on('project')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
