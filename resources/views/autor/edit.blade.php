@@ -4,7 +4,7 @@
 <div>
     <x-local-sistema
     titulo="Alteração de Autores"
-    descricao="Alterar dados de autores"
+    descricao="Alterar registro de autores"
     url="{{route('autor.index')}}"
     nomeUrl="Voltar para a listagem de autores"
     />

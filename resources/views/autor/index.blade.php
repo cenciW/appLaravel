@@ -1,7 +1,12 @@
 @extends('layouts.app')
 @section('content')
-<h1>Listagem de autores</h1>
 <div>
+    <x-local-sistema
+        titulo="Listagem de Autores"
+        descricao="Listagem de autores cadastrados"
+        url="{{route('dashboard')}}"
+        nomeUrl="Página principal"
+    />
     <table>
         <tr>
             <th>Nome</th>
