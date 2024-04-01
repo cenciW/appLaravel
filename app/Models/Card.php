@@ -12,7 +12,7 @@ class Card extends Model
     protected $table = "card";
 
     protected $fillable = [
-        "id", "project_id", "title", "description", "finished", "dt_finished", "dt_created"];
+        "project_id", "title", "description", "finished", "dt_finished", "dt_created"];
 
 
 

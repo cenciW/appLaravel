@@ -12,7 +12,7 @@ class Project extends Model
     protected $table = "project";
 
     protected $fillable = [
-        "id", "name", "description", "dt_start", "dt_end", "active"];
+        "name", "description", "dt_start", "dt_end", "active"];
 
     #definir regras para esse model
     #user rules
