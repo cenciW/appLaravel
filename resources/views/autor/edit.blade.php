@@ -2,7 +2,12 @@
 @section('content')
 
 <div>
-    <x-local-sistema titulo="Alteração de Autores" descricao="Alterar dados de autores" url="{{route('autor.index')}}" nomeUrl="Voltar para a listagem de autores" />
+    <x-local-sistema
+    titulo="Alteração de Autores"
+    descricao="Alterar dados de autores"
+    url="{{route('autor.index')}}"
+    nomeUrl="Voltar para a listagem de autores"
+    />
 
     <div class="tile">
         <div class="tile-body">
