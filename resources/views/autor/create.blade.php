@@ -1,30 +1,23 @@
 @extends('layouts.app')
 @section('content')
 
-<div>
-    <div class="app-title">
+<x-local-sistema
+    titulo="Inclusão de Autor"
+    descricao="Cadastrar novos autores"
+    url="{{route('autor.index')}}"
+    nomeUrl="Voltar para a listagem de autores"
+/>
+<div class="tile">
+    <div class="tile-body">
         <div>
-            <h1><i class="bi bi-ui-checks"></i> Inclusão de Autores</h1>
-            <p>Cadastrar novos usuários</p>
-        </div>
-        <ul class="app-breadcrumb breadcrumb">
-            <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
-            <li class="breadcrumb-item">Forms</li>
-            <li class="breadcrumb-item"><a href="#">Sample Forms</a></li>
-        </ul>
-    </div>
-    <div class="tile">
-        <div class="tile-body">
-            <div>
-                <form action="{{route('autor.store') }}" method="POST">
-                    @csrf
-                    @include('autor.__form')
+            <form action="{{route('autor.store') }}" method="POST">
+                @csrf
+                @include('autor.__form')
 
-                    <button type="submit">
-                        Salvar Registro
-                    </button>
-                </form>
-            </div>
+                <button type="submit" class="btn btn-secondary btn-lg">
+                    Salvar Cadastro do Autor
+                </button>
+            </form>
         </div>
     </div>
 </div>
