@@ -23,7 +23,7 @@ Route::prefix('autor')->group(function(){
 
     //Chamando rota para usar o controller.
     //Listar geral
-    Route::get('/index',[AutorController::class,'index'])->name('autor.index');
+    Route::any('/index',[AutorController::class,'index'])->name('autor.index');
 
     //Criar
     Route::get('/create',[AutorController::class,'create'])->name('autor.create');
