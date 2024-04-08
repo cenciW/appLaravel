@@ -5,10 +5,9 @@
     <div class="container">
         <div class="tile">
             <div class="tile-body">
-                <form class="row row-cols-lg-auto g-3 align-items-center" action="{{route('autor.index')}}" method="POST">
+                <form class="row g-3 align-items-center" action="{{route('autor.index')}}" method="POST">
                     @csrf
-                    <div class="col-12">
-                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Pesquisa</label>
+                    <div class="col-6">
                         <div class="input-group">
                             <!-- <div class="input-group-text">@</div> -->
                             <input type="text"
@@ -19,7 +18,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-2">
                         <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
                         <select class="form-select" id="inlineFormSelectPref" name="qtdPorPag">
                             @foreach($pages as $qtdPorPag)
@@ -31,11 +30,12 @@
                         </select>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-4">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
-
+                
+                <br>
                 <table class="table table-stripped table-bordered table-hover">
                     <tr class="cabecalho">
                         <th>Nome</th>
