@@ -82,10 +82,17 @@ class AutorController extends Controller
      */
     public function show(string $id)
     {
-        $registro = $this->service->show($id);
-        return view('autor.show', [
-            'registro' => $registro['registro'],
-        ]);
+
+        try {
+            $registro = $this->service->show($id);
+            return view('autor.show', [
+                'registro' => $registro,
+            ]);
+            return redirect()->route('autor.show');
+        } catch (\Exception $e) {
+            # redirect back with registro and fail
+            return Redirect::back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -93,17 +100,17 @@ class AutorController extends Controller
      */
     public function edit(string $id)
     {
-        //complete a função de editar
-        $registro = $this->service->show($id);
+        try{
+            $registro = $this->service->show($id);
+            return view('autor.edit', [
+                'registro' => $registro,
+            ]);
 
-        //Validação para caso o registro não exista
-        //if(!$registro){
-        //  return redirect()->back();
-        //}
-
-        return view('autor.edit', [
-            'registro' => $registro['registro'],
-        ]);
+            //return redirect()->route('autor.index')->with('success','Autor editado com sucesso');
+            
+        }catch(\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -115,25 +122,25 @@ class AutorController extends Controller
         $registro = $request->all();
         try {
             $registro = $this->service->update($registro, $id);
-            return redirect()->route('autor.index')->with('success', 'Autor cadastrado com sucesso');
+            return redirect()->route('autor.index')->with('success', 'Autor atualizado com sucesso');
         } catch (\Exception $e) {
             # redirect back with registro and fail
             return Redirect::back()->with('error', $e->getMessage());
-
-            // return view('autor.edit',[
-            //     'registro' => $registro,
-            //     'fail' => $e->getMessage(),
-        //]);
         }
     }
 
     public function delete(string $id)
     {
-        $registro = $this->service->show($id);
-
-        return view('autor.destroy', [
-            'registro' => $registro['registro'],
-        ]);
+        try{
+            $registro = $this->service->show($id);
+        
+            return view('autor.destroy', [
+                'registro' => $registro,
+            ]);
+        } catch (\Exception $e) {
+            # redirect back with registro and fail
+            return Redirect::back()->with('error', $e->getMessage());
+        } 
     }
 
     /**
@@ -141,7 +148,11 @@ class AutorController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->service->destroy($id);
-        return redirect()->route('autor.index');
+        try{
+            $this->service->destroy($id);
+            return redirect()->route('autor.index')->with('success', 'Autor excluído com sucesso');
+        } catch (\Exception $e) {
+            return Redirect::back()->with('error', $e->getMessage());
+        }
     }
 }

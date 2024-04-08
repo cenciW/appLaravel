@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Autor;
 use App\Services\AutorServiceInterface;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -43,8 +44,12 @@ class AutorService implements AutorServiceInterface{
     }
 
     public function show($id){
-        $registro = $this->repository->find($id);
-        return (["registro"=>$registro]);
+        try{
+            $registro = $this->repository->find($id);
+            return $registro;
+        }catch(ModelNotFoundException $e){
+            throw new Exception('Registro não encontrado.');
+        }
     }
 
 
@@ -64,8 +69,16 @@ class AutorService implements AutorServiceInterface{
     }
 
     public function destroy($id){
-        $autorCadastrado = $this->repository->find($id);
-        $autorCadastrado->delete();
+        $autorCadastrado = $this->show($id);
+
+        DB::beginTransaction();
+        try{
+            $autorCadastrado->delete();
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollBack();
+            return new Exception('Erro ao excluir o registro: '. $e->getMessage());
+        }
     }
 
 
