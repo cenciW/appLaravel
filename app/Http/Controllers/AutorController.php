@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AutorFormRequest;
-use App\Models\Autor;
-use App\Services\AutorService;
 use App\Services\AutorServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-
 
 class AutorController extends Controller
 {
@@ -22,7 +19,6 @@ class AutorController extends Controller
         //$this->autor = $autor;
     }
 
-
     /**
      * Display a listing of the resource.
      */
@@ -33,7 +29,7 @@ class AutorController extends Controller
         $page = $request->qtdPorPag ?? 5;
         //essa variavel service eu criei no construtor e atribui o valor do model
         // dd($request->all());
-        $registros =  $this->service->index($pesquisar, $page);
+        $registros = $this->service->index($pesquisar, $page);
         //$registros = Autor::paginate(10);
 
         return view('autor.index', [
@@ -60,8 +56,8 @@ class AutorController extends Controller
     {
         #validar o campo antes de efetivamente criar
         /*$request ->validate(
-            $this->autor->rules(),
-            $this->autor->feedback()
+        $this->autor->rules(),
+        $this->autor->feedback()
         );  removendo isso aqui pra fazer a requisicao de outra maneira*/
 
         //Treating errors request
@@ -70,10 +66,10 @@ class AutorController extends Controller
             $registro = $this->service->store($registro);
             return redirect()->route('autor.index')->with('success', 'Autor cadastrado com sucesso');
         } catch (\Exception $e) {
-            return view('autor.create',[
+            return view('autor.create', [
                 'registro' => $registro,
                 'fail' => $e->getMessage(),
-        ]);
+            ]);
         }
     }
 
@@ -88,7 +84,6 @@ class AutorController extends Controller
             return view('autor.show', [
                 'registro' => $registro,
             ]);
-            return redirect()->route('autor.show');
         } catch (\Exception $e) {
             # redirect back with registro and fail
             return Redirect::back()->with('error', $e->getMessage());
@@ -100,15 +95,15 @@ class AutorController extends Controller
      */
     public function edit(string $id)
     {
-        try{
+        try {
             $registro = $this->service->show($id);
             return view('autor.edit', [
                 'registro' => $registro,
             ]);
 
             //return redirect()->route('autor.index')->with('success','Autor editado com sucesso');
-            
-        }catch(\Exception $e) {
+
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -131,16 +126,16 @@ class AutorController extends Controller
 
     public function delete(string $id)
     {
-        try{
+        try {
             $registro = $this->service->show($id);
-        
+
             return view('autor.destroy', [
                 'registro' => $registro,
             ]);
         } catch (\Exception $e) {
             # redirect back with registro and fail
             return Redirect::back()->with('error', $e->getMessage());
-        } 
+        }
     }
 
     /**
@@ -148,7 +143,7 @@ class AutorController extends Controller
      */
     public function destroy(string $id)
     {
-        try{
+        try {
             $this->service->destroy($id);
             return redirect()->route('autor.index')->with('success', 'Autor excluído com sucesso');
         } catch (\Exception $e) {

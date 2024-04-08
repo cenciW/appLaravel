@@ -2,36 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Services\ProjectServiceInterface;
 use App\Http\Requests\ProjectFormRequest;
+use App\Services\ProjectServiceInterface;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ProjectController extends Controller
 {
     // faça a injeção de dependência do context
     private $service;
-    //private $autor;
-    public function __construct(ProjectServiceInterface $service/*, Autor $autor*/)
+    public function __construct(ProjectServiceInterface $service)
     {
 
         $this->service = $service;
-        //$this->autor = $autor;
     }
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //dd('acessando o controller autor controller - index');
 
-        //essa variavel service eu criei no construtor e atribui o valor do model
-        $registros = $this->service->index(10);
-        //$registros = Autor::paginate(10);
+        $pesquisar = $request->pesquisar ?? "";
+        $page = $request->qtdPorPag ?? 5;
 
-        return view('project.index', [
-            'registros' => $registros['registros'],
+        $registros = $this->service->index($pesquisar, $page);
+
+        return view('autor.index', [
+            'registros' => $registros,
+            'pages' => [5, 10, 15, 20],
+            'item' => $page,
+            'filter' => $pesquisar,
         ]);
     }
 
@@ -55,12 +53,17 @@ class ProjectController extends Controller
         $this->autor->feedback()
         );  removendo isso aqui pra fazer a requisicao de outra maneira*/
 
-        $this->service->store($request);
-
-        //mostrar o registro dentro do request
-        //dd("criando um registro");
-
-        return redirect()->route('project.index');
+        //Treating errors request
+        $registro = $request->all();
+        try {
+            $registro = $this->service->store($registro);
+            return redirect()->route('project.index')->with('success', 'Projeto cadastrado com sucesso');
+        } catch (\Exception $e) {
+            return view('project.create', [
+                'registro' => $registro,
+                'fail' => $e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -68,11 +71,16 @@ class ProjectController extends Controller
      */
     public function show(string $id)
     {
-        $registro = $this->service->show($id);
-        return view('project.show', [
-            'registro' => $registro['registro'],
-        ]);
 
+        try {
+            $registro = $this->service->show($id);
+            return view('project.show', [
+                'registro' => $registro,
+            ]);
+        } catch (\Exception $e) {
+            # redirect back with registro and fail
+            return Redirect::back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -80,18 +88,17 @@ class ProjectController extends Controller
      */
     public function edit(string $id)
     {
-        //complete a função de editar
-        $registro = $this->service->show($id);
+        try {
+            $registro = $this->service->show($id);
+            return view('project.edit', [
+                'registro' => $registro,
+            ]);
 
-        //Validação para caso o registro não exista
-        //if(!$registro){
-        //  return redirect()->back();
-        //}
+            //return redirect()->route('autor.index')->with('success','Autor editado com sucesso');
 
-        return view('project.edit', [
-            'registro' => $registro['registro'],
-        ]);
-
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -100,18 +107,28 @@ class ProjectController extends Controller
     public function update(ProjectFormRequest $request, string $id)
     {
 
-        $this->service->update($request, $id);
-        return redirect()->route('project.index');
-
+        $registro = $request->all();
+        try {
+            $registro = $this->service->update($registro, $id);
+            return redirect()->route('project.index')->with('success', 'Projeto atualizado com sucesso');
+        } catch (\Exception $e) {
+            # redirect back with registro and fail
+            return Redirect::back()->with('error', $e->getMessage());
+        }
     }
 
     public function delete(string $id)
     {
-        $registro = $this->service->show($id);
+        try {
+            $registro = $this->service->show($id);
 
-        return view('project.destroy', [
-            'registro' => $registro['registro'],
-        ]);
+            return view('project.destroy', [
+                'registro' => $registro,
+            ]);
+        } catch (\Exception $e) {
+            # redirect back with registro and fail
+            return Redirect::back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -119,7 +136,11 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->service->destroy($id);
-        return redirect()->route('project.index');
+        try {
+            $this->service->destroy($id);
+            return redirect()->route('project.index')->with('success', 'Projeto excluído com sucesso');
+        } catch (\Exception $e) {
+            return Redirect::back()->with('error', $e->getMessage());
+        }
     }
 }
