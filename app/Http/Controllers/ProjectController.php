@@ -25,7 +25,7 @@ class ProjectController extends Controller
 
         $registros = $this->service->index($pesquisar, $page);
 
-        return view('autor.index', [
+        return view('project.index', [
             'registros' => $registros,
             'pages' => [5, 10, 15, 20],
             'item' => $page,
