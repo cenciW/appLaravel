@@ -29,17 +29,18 @@ class AutorController extends Controller
     public function index(Request $request)
     {
         //dd('acessando o controller autor controller - index');
-        $pesquisar =$request->pesquisar;
-        $page = $request->qtdPorPag;
+        $pesquisar =$request->pesquisar ?? "";
+        $page = $request->qtdPorPag ?? 5;
         //essa variavel service eu criei no construtor e atribui o valor do model
         // dd($request->all());
-        $registros =  $this->service->index(10);
+        $registros =  $this->service->index($pesquisar, $page);
         //$registros = Autor::paginate(10);
 
         return view('autor.index', [
-            'registros'=> $registros['registros'],
+            'registros'=> $registros,
             'pages'=> [5,10,15,20],
-            'item'=> '5',
+            'item'=> $page,
+            'filter'=> $pesquisar,
         ]);
     }
 

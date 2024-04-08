@@ -14,12 +14,12 @@
                                 class="form-control"
                                 id="pesquisar"
                                 name="pesquisar"
-                                placeholder="Pesquisa">
+                                placeholder="Pesquisa"
+                                value="{{ isset($filter['pesquisar']) ? isset($filter['pesquisar']) : ''}}">
                         </div>
                     </div>
 
                     <div class="col-2">
-                        <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
                         <select class="form-select" id="inlineFormSelectPref" name="qtdPorPag">
                             @foreach($pages as $qtdPorPag)
                                 <!-- <option selected>Opções...</option> -->
@@ -70,6 +70,19 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                <div class="pagination justify-content-end">
+                    @if(isset($filter))
+                        {!! $registros->appends([
+                            'filter' => $filter,
+                            'qtdPorPag' => $qtdPorPag
+                            ])->links() !!}
+                    @else
+                        {!! $registros->appends([
+                            'qtdPorPag'=> $qtdPorPag
+                            ])->links() !!}
+                    @endif
+                </div>
                 <a type="button" class="btn btn-primary btn-lg" href="{{ route('autor.create')}}">Inclusão de novos autores</a>
             </div>
         </div>
