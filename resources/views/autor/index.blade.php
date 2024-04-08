@@ -3,6 +3,7 @@
 <div>
     <x-local-sistema titulo="Listagem de Autores" descricao="Listagem de autores cadastrados" url="{{route('dashboard')}}" nomeUrl="Página principal" />
     <div class="container">
+        @include('layouts.alert')
         <div class="tile">
             <div class="tile-body">
                 <form class="row g-3 align-items-center" action="{{route('autor.index')}}" method="POST">
@@ -22,7 +23,6 @@
                     <div class="col-2">
                         <select class="form-select" id="inlineFormSelectPref" name="qtdPorPag">
                             @foreach($pages as $qtdPorPag)
-                                <!-- <option selected>Opções...</option> -->
                                 <option value="{{$qtdPorPag}}"
                                 @if($item == $qtdPorPag) selected @endif>
                                 {{$qtdPorPag}}</option>
@@ -61,9 +61,7 @@
                             <td class="centralizado">
                                 <!--rotina para exclusao, edicao e delecao-->
                                 <a type="button" class="btn btn-secondary btn-sm" href="{{ route('autor.edit', $registro->id) }}">Alteração</a>
-
                                 <a type="button" class="btn btn-danger btn-sm" href="{{ route('autor.delete', $registro->id) }}">Exclusão</a>
-
                                 <a type="button" class="btn btn-info btn-sm" href="{{ route('autor.show', $registro->id) }}">Consulta</a>
                             </td>
                         </tr>
@@ -75,11 +73,11 @@
                     @if(isset($filter))
                         {!! $registros->appends([
                             'filter' => $filter,
-                            'qtdPorPag' => $qtdPorPag
+                            'qtdPorPag' => $item
                             ])->links() !!}
                     @else
                         {!! $registros->appends([
-                            'qtdPorPag'=> $qtdPorPag
+                            'qtdPorPag'=> $item
                             ])->links() !!}
                     @endif
                 </div>

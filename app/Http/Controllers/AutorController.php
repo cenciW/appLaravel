@@ -29,7 +29,7 @@ class AutorController extends Controller
     public function index(Request $request)
     {
         //dd('acessando o controller autor controller - index');
-        $pesquisar =$request->pesquisar ?? "";
+        $pesquisar = $request->pesquisar ?? "";
         $page = $request->qtdPorPag ?? 5;
         //essa variavel service eu criei no construtor e atribui o valor do model
         // dd($request->all());
@@ -37,10 +37,10 @@ class AutorController extends Controller
         //$registros = Autor::paginate(10);
 
         return view('autor.index', [
-            'registros'=> $registros,
-            'pages'=> [5,10,15,20],
-            'item'=> $page,
-            'filter'=> $pesquisar,
+            'registros' => $registros,
+            'pages' => [5, 10, 15, 20],
+            'item' => $page,
+            'filter' => $pesquisar,
         ]);
     }
 
@@ -64,12 +64,17 @@ class AutorController extends Controller
             $this->autor->feedback()
         );  removendo isso aqui pra fazer a requisicao de outra maneira*/
 
-        $this->service->store($request);
-        
-        //mostrar o registro dentro do request
-        //dd("criando um registro");
-
-        return redirect()->route('autor.index');
+        //Treating errors request
+        $registro = $request->all();
+        try {
+            $registro = $this->service->store($registro);
+            return redirect()->route('autor.index')->with('success', 'Autor cadastrado com sucesso');
+        } catch (\Exception $e) {
+            return view('autor.create',[
+                'registro' => $registro,
+                'fail' => $e->getMessage(),
+        ]);
+        }
     }
 
     /**
@@ -80,8 +85,7 @@ class AutorController extends Controller
         $registro = $this->service->show($id);
         return view('autor.show', [
             'registro' => $registro['registro'],
-        ]);        
-
+        ]);
     }
 
     /**
@@ -94,14 +98,12 @@ class AutorController extends Controller
 
         //Validação para caso o registro não exista
         //if(!$registro){
-          //  return redirect()->back();
+        //  return redirect()->back();
         //}
 
         return view('autor.edit', [
-            'registro'=> $registro['registro'],
+            'registro' => $registro['registro'],
         ]);
-
-
     }
 
     /**
@@ -109,17 +111,28 @@ class AutorController extends Controller
      */
     public function update(AutorFormRequest $request, string $id)
     {
-    
-        $this -> service -> update($request, $id);
-        return redirect()->route('autor.index');
 
+        $registro = $request->all();
+        try {
+            $registro = $this->service->update($registro, $id);
+            return redirect()->route('autor.index')->with('success', 'Autor cadastrado com sucesso');
+        } catch (\Exception $e) {
+            # redirect back with registro and fail
+            return Redirect::back()->with('error', $e->getMessage());
+
+            // return view('autor.edit',[
+            //     'registro' => $registro,
+            //     'fail' => $e->getMessage(),
+        //]);
+        }
     }
 
-    public function delete(string $id){
-        $registro = $this ->service -> show($id);
+    public function delete(string $id)
+    {
+        $registro = $this->service->show($id);
 
         return view('autor.destroy', [
-            'registro'=> $registro['registro'],
+            'registro' => $registro['registro'],
         ]);
     }
 
@@ -128,7 +141,7 @@ class AutorController extends Controller
      */
     public function destroy(string $id)
     {
-        $this ->service -> destroy($id);
+        $this->service->destroy($id);
         return redirect()->route('autor.index');
     }
 }
