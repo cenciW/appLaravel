@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AutorFormRequest;
+use App\Http\Requests\PersonalUserFormRequest;
+use App\Services\PersonalUserServiceInterface;
 use Illuminate\Support\Facades\Redirect;
 
-class UserController extends Controller
+class PersonalUserController extends Controller
 {
     // faça a injeção de dependência do context
     private $service;
     //private $autor;
-    public function __construct(UserServiceInterface $service/*, Autor $autor*/)
+    public function __construct(PersonalUserServiceInterface $service)
     {
 
         $this->service = $service;
@@ -25,7 +26,7 @@ class UserController extends Controller
         //dd('acessando o controller autor controller - index');
 
         //essa variavel service eu criei no construtor e atribui o valor do model
-        $registros = $this->service->index(10);
+        $registros = $this->service->index('', 10);
         //$registros = Autor::paginate(10);
 
         return view('user.index', [
@@ -45,7 +46,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AutorFormRequest $request)
+    public function store(PersonalUserFormRequest $request)
     {
         #validar o campo antes de efetivamente criar
         /*$request ->validate(
@@ -95,7 +96,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AutorFormRequest $request, string $id)
+    public function update(PersonalUserFormRequest $request, string $id)
     {
 
         $this->service->update($request, $id);

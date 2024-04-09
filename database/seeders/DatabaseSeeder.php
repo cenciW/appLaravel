@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             PersonalUserSeeder::class,
             CardSeeder::class,
             PrioritySeeder::class,
+            TypeLogSeeder::class,
         ]);
     }
 }

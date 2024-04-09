@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UserFormRequest extends FormRequest
+class PersonalUserFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,7 +34,7 @@ class UserFormRequest extends FormRequest
         if ($this->method() == 'PUT') {
             $rules['email'] = [
                 'required',
-                Rule::unique('users')->ignore($this->id),
+                Rule::unique('personal_user')->ignore($this->id),
             ];
         }
 

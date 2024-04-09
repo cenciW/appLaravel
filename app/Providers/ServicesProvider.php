@@ -16,6 +16,7 @@ class ServicesProvider extends ServiceProvider
         ProjectServiceInterface::class => ProjectService::class,
         CardServiceInterface::class => CardService::class,
         PriorityServiceInterface::class => PriorityService::class,
+        TypeLogServiceInterface::class => TypeLogService::class,
     ];
 
     // /**
