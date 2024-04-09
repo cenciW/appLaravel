@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             ProjectSeeder::class,
             PersonalUserSeeder::class,
             CardSeeder::class,
+            PrioritySeeder::class,
         ]);
     }
 }
