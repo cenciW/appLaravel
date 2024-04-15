@@ -14,6 +14,10 @@ class Autor extends Model
     protected $fillable = [
         "nome","apelido","cidade","bairro","cep","email","telefone"];
 
+    protected $hidden = [
+        "created_at","updated_at"
+    ];
+
     #definir regras para esse model
     public function rules(){
         return [
