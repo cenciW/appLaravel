@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AutorFormRequest;
 use App\Services\AutorServiceInterface;
 use Illuminate\Http\Request;

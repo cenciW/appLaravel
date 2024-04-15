@@ -1,10 +1,10 @@
 <?php
 
 //deve inserir a referencia aqui para conseguir usar o controller
-use App\Http\Controllers\AutorController;
-use App\Http\Controllers\Dashboard;
-use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\Web\AutorController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\Dashboard;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
