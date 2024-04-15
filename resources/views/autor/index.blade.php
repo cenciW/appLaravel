@@ -31,7 +31,14 @@
                     </div>
 
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">
+                            Pesquisar 
+                            <i class="bi bi-search fs-6"></i></button>
+
+                        <a type="button" class="btn btn-warning" href="{{ route('autor.index')}}">
+                            Limpar Pesquisa 
+                            <i class="bi bi-x-circle fs-6"></i>
+                        </a>
                     </div>
                 </form>
                 
@@ -60,16 +67,23 @@
                             <td>{{ $registro->telefone }}</td>
                             <td class="centralizado">
                                 <!--rotina para exclusao, edicao e delecao-->
-                                <a type="button" class="btn btn-secondary btn-sm" href="{{ route('autor.edit', $registro->id) }}">Alteração</a>
-                                <a type="button" class="btn btn-danger btn-sm" href="{{ route('autor.delete', $registro->id) }}">Exclusão</a>
-                                <a type="button" class="btn btn-info btn-sm" href="{{ route('autor.show', $registro->id) }}">Consulta</a>
+                                <a type="button" class="btn btn-secondary btn-sm" href="{{ route('autor.edit', $registro->id) }}">
+                                    <i class="bi bi-pencil-square fs-5"></i>
+                                </a>
+                                <a type="button" class="btn btn-danger btn-sm" href="{{ route('autor.delete', $registro->id) }}">
+                                    <i class="bi bi-trash-fill fs-5"> </i> 
+                                </a>
+                                <a type="button" class="btn btn-info btn-sm" href="{{ route('autor.show', $registro->id) }}">
+                                    <i class="bi bi-search fs-5"> </i> 
+                                </a>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
 
-                <div class="pagination justify-content-end">
+                <div>
+                    <!-- class="pagination justify-content-end" -->
                     @if(isset($filter))
                         {!! $registros->appends([
                             'filter' => $filter,
@@ -81,7 +95,10 @@
                             ])->links() !!}
                     @endif
                 </div>
-                <a type="button" class="btn btn-primary btn-lg" href="{{ route('autor.create')}}">Inclusão de novos autores</a>
+                
+                <a type="button" class="btn btn-primary btn-lg" href="{{ route('autor.create')}}">Inclusão de novos autores
+                    <i class="bi bi-person-add fs-4"></i>
+                </a>
             </div>
         </div>
     </div>
