@@ -35,10 +35,10 @@ class Task extends Model
             'card_id' => 'O campo :attribute é obrigatório',
             'statustask_id' => 'O campo :attribute é obrigatório',
             'priority_id' => 'O campo :attribute é obrigatório',
-            'description' => 'O campo :attribute é obrigatório'
-            'dtStart' => 'O campo :attribute é obrigatório'
-            'dtEnd' => 'O campo :attribute é obrigatório'
-            'deadLine' => 'O campo :attribute é obrigatório'
+            'description' => 'O campo :attribute é obrigatório',
+            'dtStart' => 'O campo :attribute é obrigatório',
+            'dtEnd' => 'O campo :attribute é obrigatório',
+            'deadLine' => 'O campo :attribute é obrigatório',
         ];
     }
 }
