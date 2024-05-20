@@ -15,12 +15,10 @@ class Card extends Model
         "project_id", "title", "description", "finished", "dt_finished", "dt_created"];
 
 
-
     public function project() {
         return $this->belongsTo(Project::class);
     }
 
-    
     #definir regras para esse model
     #user rules
     public function rules()
