@@ -15,8 +15,10 @@ return new class extends Migration
             $table->increments('id');
             $table->string('description');
             $table->date('dt_request');
+
             $table->unsignedInteger('user_project_id');
             $table->foreign('user_project_id')->references('id')->on('user_project')->onDelete('cascade');
+            
             $table->unsignedInteger('status_request_id');
             $table->foreign('status_request_id')->references('id')->on('status_request')->onDelete('cascade');
             $table->timestamps();

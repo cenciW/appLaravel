@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_project', function (Blueprint $table) {
             $table->increments('id');
+            
             $table->integer('permission_id')->unsigned();
             $table->foreign('permission_id')->references('id')->on('permission')->onDelete('cascade');
 
