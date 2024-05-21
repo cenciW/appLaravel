@@ -13,6 +13,7 @@ abstract class AbstractService implements ServiceInterface
 
     public function index($pesquisar, $page) {
         $registros = $this->repository->paginate($page);
+        dd($registros);
         return ([
             "registros"=>$registros
         ]);

@@ -58,7 +58,7 @@
                         @foreach($registros as $registro)
                         <tr> <!-- linha-->
                             <!-- colunas-->
-                            <td>{{ $registro->nome }}</td>
+                            <!-- <td>{{ $registro->nome }}</td> -->
                             <!-- <td>{{ $registro->apelido }}</td>
                             <td>{{ $registro->cidade }}</td>
                             <td>{{ $registro->bairro }}</td>

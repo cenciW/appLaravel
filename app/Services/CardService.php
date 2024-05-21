@@ -9,6 +9,7 @@ use App\Services\Base\AbstractService;
 
 class CardService extends AbstractService implements CardServiceInterface {
     private $repository;
+
     public function __construct(Card $card) {
         $this->repository = $card;
         parent::__construct($card);

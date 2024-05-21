@@ -4,17 +4,25 @@ namespace App\Services;
 
 use App\Models\Autor;
 use App\Services\AutorServiceInterface;
+use App\Services\Base\AbstractService;
+
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AutorService implements AutorServiceInterface{
+class AutorService extends AbstractService implements AutorServiceInterface{
+
+    // protected $repository;
+
+    // public function __construct(Autor $autor) {
+    //     $this->repository = $autor;
+    //     parent::__construct($autor);
+    // }
     private $repository;
     public function __construct(Autor $autor){
         $this->repository = $autor;
     }
-
     public function index($pesquisar, $page){
             $registro = $this->repository->where(function($query) use($pesquisar){
             if($pesquisar){
@@ -24,15 +32,12 @@ class AutorService implements AutorServiceInterface{
             }
         })->paginate($page);
 
+            
         return $registro;
-
-
     }
-    
-    //salvar
+      //salvar
     public function store($request){
-
-        DB::beginTransaction();
+      DB::beginTransaction();
         try{
             $registro = $this->repository->create($request);
             DB::commit();
@@ -42,8 +47,7 @@ class AutorService implements AutorServiceInterface{
             return new Exception('Erro ao criar o registro: '. $e->getMessage());
         }
     }
-
-    public function show($id){
+  public function show($id){
         try{
             $registro = $this->repository->find($id);
             return $registro;
@@ -51,13 +55,10 @@ class AutorService implements AutorServiceInterface{
             throw new Exception('Registro não encontrado.');
         }
     }
-
-
-    public function update($request, $id){
-           
+  public function update($request, $id){
+        
         $autorCadastrado = $this->repository->find($id);
-
-        DB::beginTransaction();
+      DB::beginTransaction();
         try{
             $registro = $autorCadastrado->update($request);
             DB::commit();
@@ -67,11 +68,9 @@ class AutorService implements AutorServiceInterface{
             return new Exception('Erro ao criar o registro: '. $e->getMessage());
         }
     }
-
-    public function destroy($id){
+  public function destroy($id){
         $autorCadastrado = $this->show($id);
-
-        DB::beginTransaction();
+      DB::beginTransaction();
         try{
             $autorCadastrado->delete();
             DB::commit();

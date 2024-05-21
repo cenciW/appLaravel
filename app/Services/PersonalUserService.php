@@ -8,6 +8,8 @@ use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 
+use App\Services\Base\AbstractService;
+
 class PersonalUserService extends AbstractService implements PersonalUserServiceInterface
 {
     private $repository;
