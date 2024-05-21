@@ -33,8 +33,7 @@ class Task extends Model
     public function card()
     {
         return $this->belongsTo(Card::class);
-    }
-
+    } 
     #1 task has 1 statusTask
     public function statusTask()
     {

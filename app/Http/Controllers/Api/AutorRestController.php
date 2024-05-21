@@ -75,6 +75,7 @@ class AutorRestController extends Controller
     
     public function destroy(Request $request, AutorServiceInterface $service)
     {
+        
     }
 
 }

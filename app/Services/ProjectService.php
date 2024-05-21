@@ -3,48 +3,56 @@
 namespace App\Services;
 
 use App\Models\Project;
+use App\Services\Base\AbstractService;
 
-class ProjectService implements ProjectServiceInterface
+class ProjectService extends AbstractService implements ProjectServiceInterface
 {
     private $repository;
     public function __construct(Project $project)
     {
         $this->repository = $project;
+        parent::__construct($project);
     }
 
-    public function index()
-    {
-        $registros = $this->repository->paginate(15);
-        return ([
-            "registros" => $registros,
-        ]);
-    }
 
-    //salvar
-    public function store($request)
-    {
+    //Talvez fazer um filtro para buscar por projetos: 
+    /*
+        - Finalizados
+        - Em Andamento    
+    */ 
+    // public function index()
+    // {
+    //     $registros = $this->repository->paginate(15);
+    //     return ([
+    //         "registros" => $registros,
+    //     ]);
+    // }
 
-        $this->repository->create($request->all());
-    }
+    // //salvar
+    // public function store($request)
+    // {
 
-    public function show($id)
-    {
-        $registro = $this->repository->find($id);
-        return (["registro" => $registro]);
-    }
+    //     $this->repository->create($request->all());
+    // }
 
-    public function update($request, $id)
-    {
+    // public function show($id)
+    // {
+    //     $registro = $this->repository->find($id);
+    //     return (["registro" => $registro]);
+    // }
 
-        $registro = $request->all();
-        $autor = $this->repository->find($id);
-        $autor->update($registro);
-    }
+    // public function update($request, $id)
+    // {
 
-    public function destroy($id)
-    {
-        $projetoCadastrado = $this->repository->find($id);
-        $projetoCadastrado->delete();
-    }
+    //     $registro = $request->all();
+    //     $autor = $this->repository->find($id);
+    //     $autor->update($registro);
+    // }
+
+    // public function destroy($id)
+    // {
+    //     $projetoCadastrado = $this->repository->find($id);
+    //     $projetoCadastrado->delete();
+    // }
 
 }
