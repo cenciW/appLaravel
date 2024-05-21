@@ -8,7 +8,7 @@ use App\Services\Base\AbstractService;
 
 
 class PermissionService extends AbstractService implements PermissionServiceInterface {
-    private $repository;
+    protected $repository;
     public function __construct(Permission $permission) {
         $this->repository = $permission;
         parent::__construct($permission);

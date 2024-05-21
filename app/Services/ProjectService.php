@@ -7,7 +7,7 @@ use App\Services\Base\AbstractService;
 
 class ProjectService extends AbstractService implements ProjectServiceInterface
 {
-    private $repository;
+    protected $repository;
     public function __construct(Project $project)
     {
         $this->repository = $project;

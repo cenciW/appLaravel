@@ -11,7 +11,7 @@ use App\Services\Base\AbstractService;
 
 class PriorityService extends AbstractService implements PriorityServiceInterface
 {
-    private $repository;
+    protected $repository;
     public function __construct(Priority $priority)
     {
         $this->repository = $priority;

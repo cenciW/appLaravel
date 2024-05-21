@@ -12,7 +12,7 @@ use App\Services\Base\AbstractService;
 
 class PersonalUserService extends AbstractService implements PersonalUserServiceInterface
 {
-    private $repository;
+    protected $repository;
     public function __construct(PersonalUser $personalUser)
     {
         $this->repository = $personalUser;
