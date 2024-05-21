@@ -42,7 +42,10 @@ class PermissionRestController extends Controller
     {
         
         $registro = $request->all();
+        // Log para depuração
         try{
+            //registro aqui ta ok, chegando certo, mas o método store nao está persistindo
+            //estranho é que no autor está funcionando
             $this->service->store($registro);
             return response()->json([
                 'message' => 'Registro salvo com sucesso',

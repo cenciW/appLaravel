@@ -12,7 +12,8 @@ class Permission extends Model
     protected $table = "permission";
 
     protected $fillable = [
-        "role"];
+        "role"
+    ];
 
   
     #definir regras para esse model

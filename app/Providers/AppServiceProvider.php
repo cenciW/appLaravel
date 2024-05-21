@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use App\Services\AutorService;
 use App\Services\AutorServiceInterface;
+
+use App\Services\PermissionService;
+use App\Services\PermissionServiceInterface;
+
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,9 +19,14 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            AutorServiceInterface::class,
-            AutorService::class,
-    );
+            PermissionServiceInterface::class,
+            PermissionService::class,
+        );
+
+        // $this->app->bind(
+        //     AutorServiceInterface::class,
+        //     AutorService::class,
+        // );
     }
 
     /**

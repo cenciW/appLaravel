@@ -25,10 +25,8 @@ class AbstractService implements ServiceInterface
         DB::beginTransaction();
         try {
             $registro = $this->repository->create($request);
-
             DB::commit();
-
-            dd('Criando registro');
+            //dd('Criando registro');
             return $registro;
         } catch (Exception $e) {
             DB::rollBack();

@@ -36,12 +36,13 @@ class AutorRestController extends Controller
     public function store(AutorFormRequest $request)
     {
         $registro = $request->all();
+        
         try{
-            $this->service->store($registro);
+            $this->service->store($registro);            
             return response()->json([
                 'message' => 'Registro salvo com sucesso',
-                'status' => 200,
-            ], 200);
+                'status' => 201,
+            ], 201);
         }catch(\Exception $e){
             return response()->json([
                 'message' => 'Erro ao salvar o registro',
