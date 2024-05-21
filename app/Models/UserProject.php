@@ -11,12 +11,18 @@ class UserProject extends Model
 
     protected $table = "user_project";
     protected $fillable = [
+        'permission_id',
+        'personal_user_id',
+        'project_id',
         'dt_admission',
     ];
 
     public function rules()
     {
         return [
+            'permission_id' => 'required',
+            'personal_user_id' => 'required',
+            'project_id' => 'required',
             'dt_admission' => 'required',
         ];
     }
@@ -38,6 +44,9 @@ class UserProject extends Model
     {
         return [
             'dt_admission' => 'O campo ::attribute é obrigatório',
+            'permission_id' => 'O campo ::attribute é obrigatório',
+            'user_id' => 'O campo ::attribute é obrigatório',
+            'project_id' => 'O campo ::attribute é obrigatório',
         ];
     }
 }

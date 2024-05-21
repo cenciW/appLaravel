@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('status_task', function (Blueprint $table) {
-            $table->id()->autoIncremented();
-            $table->string('status');
+        Schema::create('priority', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('weight');
+            $table->timestamps();
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('status_task');
+        Schema::dropIfExists('priority');
     }
 };

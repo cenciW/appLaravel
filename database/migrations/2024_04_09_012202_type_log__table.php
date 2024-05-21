@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('type_log', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->string('type');
+            $table->increments('id');
+            $table->string('type', 45);
             $table->timestamps();
         });
     }

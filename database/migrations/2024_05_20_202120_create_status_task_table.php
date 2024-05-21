@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permission', function (Blueprint $table) {
-            $table->id()->autoIncremented();
-            $table->string('role');
+        Schema::create('status_task', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('status');
         });
     }
 
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permission');
+        Schema::dropIfExists('status_task');
     }
 };

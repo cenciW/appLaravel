@@ -10,6 +10,8 @@ class Request extends Model
     use HasFactory;
     protected $table = "request";
     protected $fillable = [
+        'status_request_id',
+        'user_project_id',
         'description',
         'dt_request',
     ];
@@ -17,6 +19,8 @@ class Request extends Model
     public function rules()
     {
         return [
+            'status_request_id' => 'required', // 'status_request_id' => 'required|exists:status_request,id
+            'user_project_id' => 'required', // 'user_project_id' => 'required|exists:user_project,id
             'description' => 'required',
             'dt_request' => 'required',
         ];
@@ -37,8 +41,10 @@ class Request extends Model
     public function feedback()
     {
         return [
-            'type' => 'O campo ::attribute é obrigatório',
             'dt_request' => 'O campo ::attribute é obrigatório',
+            'description' => 'O campo ::attribute é obrigatório',
+            'user_project_id' => 'O campo ::attribute é obrigatório',
+            'status_request_id' => 'O campo ::attribute é obrigatório',
         ];
     }
 }

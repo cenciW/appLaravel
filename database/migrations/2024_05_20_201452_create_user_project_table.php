@@ -12,13 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_project', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->unsignedInteger('permission_id');
+            $table->increments('id');
+            $table->integer('permission_id')->unsigned();
             $table->foreign('permission_id')->references('id')->on('permission')->onDelete('cascade');
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('personal_user')->onDelete('cascade');
-            $table->unsignedInteger('project_id');
+
+            $table->integer('personal_user_id')->unsigned();
+            $table->foreign('personal_user_id')->references('id')->on('personal_user')->onDelete('cascade');
+
+            $table->integer('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('project')->onDelete('cascade');
+
             $table->date('dt_admission');
             $table->timestamps();
         });

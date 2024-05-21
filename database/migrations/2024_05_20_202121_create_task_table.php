@@ -12,17 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('task', function (Blueprint $table) {
-            $table->id()->autoIncrement();
+            $table->increments('id');
             $table->unsignedInteger('card_id');
             $table->foreign('card_id')->references('id')->on('card')->onDelete('cascade');
-            $table->unsignedInteger('statustask_id');
-            $table->foreign('statustask_id')->references('id')->on('statusTask')->onDelete('cascade');
+            $table->unsignedInteger('status_task_id');
+            $table->foreign('status_task_id')->references('id')->on('status_task')->onDelete('cascade');
             $table->unsignedInteger('priority_id');
             $table->foreign('priority_id')->references('id')->on('priority')->onDelete('cascade');
             $table->string('description');
-            $table->date('dtStart');
-            $table->date('dtEnd');
-            $table->date('deadLine');
+            $table->date('dt_start');
+            $table->date('dt_end');
+            $table->string('dead_line');
             $table->timestamps();
         });
     }

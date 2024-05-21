@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('priority', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->integer('weight');
-            $table->timestamps();
+        Schema::create('permission', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('role');
         });
     }
 
@@ -23,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('priority');
+        Schema::dropIfExists('permission');
     }
 };

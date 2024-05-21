@@ -11,14 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('request', function (Blueprint $table) {
+        Schema::create('project_log', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description');
-            $table->date('dt_request');
-            $table->unsignedInteger('user_project_id');
+
+            $table->integer('project_id')->unsigned();
+            $table->foreign('project_id')->references('id')->on('project')->onDelete('cascade');
+
+            $table->integer('type_log_id')->unsigned();
+            $table->foreign('type_log_id')->references('id')->on('type_log')->onDelete('cascade');
+
+            $table->integer('user_project_id')->unsigned();
             $table->foreign('user_project_id')->references('id')->on('user_project')->onDelete('cascade');
-            $table->unsignedInteger('status_request_id');
-            $table->foreign('status_request_id')->references('id')->on('status_request')->onDelete('cascade');
+
+            $table->date('dt_modified');
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('request');
+        Schema::dropIfExists('project_log');
     }
 };

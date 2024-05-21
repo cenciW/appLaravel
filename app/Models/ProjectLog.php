@@ -10,6 +10,9 @@ class ProjectLog extends Model
     use HasFactory;
     protected $table = "project_log";
     protected $fillable = [
+        'project_id',
+        'user_project_id',
+        'type_log_id',
         'dt_modified',
     ];
 
@@ -42,6 +45,9 @@ class ProjectLog extends Model
     {
         return [
             'dt_modified' => 'O campo ::attribute é obrigatório',
+            'project_id' => 'O campo ::attribute é obrigatório',
+            'user_project_id' => 'O campo ::attribute é obrigatório',
+            'type_log_id' => 'O campo ::attribute é obrigatório',
         ];
     }
 }
