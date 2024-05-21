@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PermissionFormRequest extends FormRequest
+class TaskFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -12,7 +12,7 @@ class PermissionFormRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
-    }  
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -21,17 +21,8 @@ class PermissionFormRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
-            'role' => 'required',
-        ];
-
-        return $rules;
-    }
-
-    public function messages(): array
-    {
         return [
-            'role' => 'O campo :attribute é obrigatório',
+            //
         ];
     }
 }

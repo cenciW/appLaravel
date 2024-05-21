@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             AutorServiceInterface::class,
-            AutorService::class
+            AutorService::class,
     );
     }
 

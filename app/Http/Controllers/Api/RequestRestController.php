@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\RequestFormRequest;
+use App\Models\Request;
+use App\Services\RequestServiceInterface;
 
 class RequestRestController extends Controller
 {
@@ -16,7 +18,7 @@ class RequestRestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $pesquisar = $request->pesquisar ?? "";
@@ -59,7 +61,19 @@ class RequestRestController extends Controller
     public function show(string $id)
     {
         //
+        $registro = $this->service->show($id);
         
+        try{
+            return response()->json([
+                'registro' => $registro,
+                'status' => 200,
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => 'Erro ao mostrar o registro',
+                'status' => 500,
+            ], 500);
+        }  
     }
 
     /**

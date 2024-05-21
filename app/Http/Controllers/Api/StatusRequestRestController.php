@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StatusRequestFormRequest;
+use App\Models\StatusRequest;
+use App\Services\StatusRequestServiceInterface;
 use Illuminate\Http\Request;
 
 class StatusRequestRestController extends Controller
@@ -16,7 +19,7 @@ class StatusRequestRestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $pesquisar = $request->pesquisar ?? "";
@@ -59,7 +62,19 @@ class StatusRequestRestController extends Controller
     public function show(string $id)
     {
         //
+        $registro = $this->service->show($id);
         
+        try{
+            return response()->json([
+                'registro' => $registro,
+                'status' => 200,
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => 'Erro ao mostrar o registro',
+                'status' => 500,
+            ], 500);
+        }  
     }
 
     /**

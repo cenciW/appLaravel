@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProjectLogFormRequest;
+use App\Models\ProjectLog;
+use App\Services\ProjectLogServiceInterface;
 use Illuminate\Http\Request;
-
 class ProjectLogRestController extends Controller
 {
     private $service;
@@ -16,7 +18,7 @@ class ProjectLogRestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $pesquisar = $request->pesquisar ?? "";
@@ -59,7 +61,19 @@ class ProjectLogRestController extends Controller
     public function show(string $id)
     {
         //
+        $registro = $this->service->show($id);
         
+        try{
+            return response()->json([
+                'registro' => $registro,
+                'status' => 200,
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => 'Erro ao mostrar o registro',
+                'status' => 500,
+            ], 500);
+        }  
     }
 
     /**

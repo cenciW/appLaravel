@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Project;
+use App\Models\Card;
 use Illuminate\Http\Request;
 use App\Services\Base\AbstractService;
 

@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Services\Base;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 
-abstract class AbstractService implements ServiceInterface
+class AbstractService implements ServiceInterface
 {
     protected $repository;
 
@@ -13,7 +16,6 @@ abstract class AbstractService implements ServiceInterface
 
     public function index($pesquisar, $page) {
         $registros = $this->repository->paginate($page);
-        dd($registros);
         return ([
             "registros"=>$registros
         ]);
@@ -23,7 +25,10 @@ abstract class AbstractService implements ServiceInterface
         DB::beginTransaction();
         try {
             $registro = $this->repository->create($request);
+
             DB::commit();
+
+            dd('Criando registro');
             return $registro;
         } catch (Exception $e) {
             DB::rollBack();

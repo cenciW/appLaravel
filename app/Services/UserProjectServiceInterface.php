@@ -4,5 +4,6 @@ namespace App\Services;
 
 use App\Services\Base\ServiceInterface;
 
-interface RequestServiceInterface extends ServiceInterface{
+interface UserProjectServiceInterface extends ServiceInterface{
+
 }

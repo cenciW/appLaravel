@@ -51,7 +51,6 @@ class AutorFormRequest extends FormRequest
             'bairro'=> 'O campo :attribute é obrigatório',
             'cep'=> 'O campo :attribute é obrigatório',
             'email'=> 'O campo :attribute é obrigatório',
-            'email'=> 'o campo :attribute já está cadastrado',
             'telefone'=> 'O campo :attribute é obrigatório', 
         ];
     }

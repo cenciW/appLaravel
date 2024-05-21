@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CardFormRequest;
+use App\Models\Card;
+use App\Services\CardServiceInterface;
 use Illuminate\Http\Request;
 
 class CardRestController extends Controller
@@ -16,7 +19,7 @@ class CardRestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $pesquisar = $request->pesquisar ?? "";

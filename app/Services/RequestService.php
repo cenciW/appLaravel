@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Request;
+use App\Services\RequestServiceInterface;
 use App\Services\Base\AbstractService;
 
 class RequestService extends AbstractService implements RequestServiceInterface

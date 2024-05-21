@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PriorityFormRequest;
+use App\Models\Priority;
+use App\Services\PriorityServiceInterface;
 use Illuminate\Http\Request;
 
 class PriorityRestController extends Controller
@@ -15,7 +18,7 @@ class PriorityRestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $pesquisar = $request->pesquisar ?? "";

@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PersonalUserFormRequest;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
     private $service;
     //private $autor;
-    public function __construct(PermissionServiceInterface $service/*, Autor $autor*/)
-    {
+    // public function __construct(PermissionServiceInterface $service/*, Autor $autor*/)
+    // {
 
-        $this->service = $service;
-        //$this->autor = $autor;
-    }
+    //     $this->service = $service;
+    //     //$this->autor = $autor;
+    // }
     /**
      * Display a listing of the resource.
      */

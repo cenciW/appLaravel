@@ -2,8 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AutorRestController;
 
+use App\Http\Controllers\Api\AutorRestController;
+use App\Http\Controllers\Api\PersonalUserRestController;
+use App\Http\Controllers\Api\PermissionRestController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -35,6 +37,42 @@ Route::prefix('autor')->group(function () {
     //Deletar
     Route::delete('/destroy/{id}', [AutorRestController::class, 'destroy']);
 });
+
+Route::prefix('user')->group(function () {
+
+    //Chamando rota para usar o controller.
+    //Listar geral
+    Route::any('/index', [PersonalUserRestController::class, 'index']);
+    //Listar com id
+    Route::get('/show/{id}', [PersonalUserRestController::class, 'show']);
+
+    //url esquerda ----- urn na direita
+    //Salvar
+    Route::post('/store', [PersonalUserRestController::class, 'store']);
+    //update
+    Route::put('/update/{id}', [PersonalUserRestController::class, 'update']);
+    //Deletar
+    Route::delete('/destroy/{id}', [PersonalUserRestController::class, 'destroy']);
+});
+
+Route::prefix('permission')->group(function(){
+
+    //Chamando rota para usar o controller.
+    //Listar geral
+    Route::any('/index', [PermissionRestController::class, 'index']);
+    //Listar com id
+    Route::get('/show/{id}', [PermissionRestController::class, 'show']);
+
+    //url esquerda ----- urn na direita
+    //Salvar
+    Route::post('/store', [PermissionRestController::class, 'store']);
+    //update
+    Route::put('/update/{id}', [PermissionRestController::class, 'update']);
+    //Deletar
+    Route::delete('/destroy/{id}', [PermissionRestController::class, 'destroy']);
+});
+
+
 /*
 Route::prefix('project')->group(function () {
 

@@ -21,18 +21,18 @@ class CardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //dd('acessando o controller autor controller - index');
+    // public function index()
+    // {
+    //     //dd('acessando o controller autor controller - index');
 
-        //essa variavel service eu criei no construtor e atribui o valor do model
-        $registros = $this->service->index(10);
-        //$registros = Autor::paginate(10);
+    //     //essa variavel service eu criei no construtor e atribui o valor do model
+    //     $registros = $this->service->index(10);
+    //     //$registros = Autor::paginate(10);
 
-        return view('card.index', [
-            'registros' => $registros['registros'],
-        ]);
-    }
+    //     return view('card.index', [
+    //         'registros' => $registros['registros'],
+    //     ]);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -46,21 +46,21 @@ class CardController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CardFormRequest $request)
-    {
-        #validar o campo antes de efetivamente criar
-        /*$request ->validate(
-        $this->autor->rules(),
-        $this->autor->feedback()
-        );  removendo isso aqui pra fazer a requisicao de outra maneira*/
+    // public function store(CardFormRequest $request)
+    // {
+    //     #validar o campo antes de efetivamente criar
+    //     /*$request ->validate(
+    //     $this->autor->rules(),
+    //     $this->autor->feedback()
+    //     );  removendo isso aqui pra fazer a requisicao de outra maneira*/
 
-        $this->service->store($request);
+    //     $this->service->store($request);
 
-        //mostrar o registro dentro do request
-        //dd("criando um registro");
+    //     //mostrar o registro dentro do request
+    //     //dd("criando um registro");
 
-        return redirect()->route('card.index');
-    }
+    //     return redirect()->route('card.index');
+    // }
 
     /**
      * Display the specified resource.
@@ -96,13 +96,13 @@ class CardController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CardFormRequest $request, string $id)
+    /*public function update(CardFormRequest $request, string $id)
     {
 
         $this->service->update($request, $id);
         return redirect()->route('card.index');
 
-    }
+    }*/
 
     public function delete(string $id)
     {
