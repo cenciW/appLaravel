@@ -11,37 +11,32 @@
                     <div class="col-6">
                         <div class="input-group">
                             <!-- <div class="input-group-text">@</div> -->
-                            <input type="text"
-                                class="form-control"
-                                id="pesquisar"
-                                name="pesquisar"
-                                placeholder="Pesquisa"
-                                value="{{ isset($filter['pesquisar']) ? isset($filter['pesquisar']) : ''}}">
+                            <input type="text" class="form-control" id="pesquisar" name="pesquisar" placeholder="Pesquisa" value="{{ isset($filter['pesquisar']) ? isset($filter['pesquisar']) : ''}}">
                         </div>
                     </div>
 
                     <div class="col-2">
                         <select class="form-select" id="inlineFormSelectPref" name="qtdPorPag">
                             @foreach($pages as $qtdPorPag)
-                                <option value="{{$qtdPorPag}}"
-                                @if($item == $qtdPorPag) selected @endif>
-                                {{$qtdPorPag}}</option>
+                            <option value="{{$qtdPorPag}}" @if($item==$qtdPorPag) selected @endif>
+                                {{$qtdPorPag}}
+                            </option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="col-4">
                         <button type="submit" class="btn btn-primary">
-                            Pesquisar 
+                            Pesquisar
                             <i class="bi bi-search fs-6"></i></button>
 
                         <a type="button" class="btn btn-warning" href="{{ route('autor.index')}}">
-                            Limpar Pesquisa 
+                            Limpar Pesquisa
                             <i class="bi bi-x-circle fs-6"></i>
                         </a>
                     </div>
                 </form>
-                
+
                 <br>
                 <table class="table table-stripped table-bordered table-hover">
                     <tr class="cabecalho">
@@ -56,13 +51,8 @@
                     </tr>
                     <tbody>
                         @foreach($registros as $registro)
-                        <tr> <!-- linha-->
-                            <!-- colunas-->
-                            <!-- <td>{{ $registro->nome }}</td> -->
-                            <!-- <td>{{ $registro->apelido }}</td>
-                            <td>{{ $registro->cidade }}</td>
-                            <td>{{ $registro->bairro }}</td>
-                            <td>{{ $registro->cep }}</td> -->
+                        <tr>
+                            <td>{{ $registro->nome }}</td>
                             <td>{{ $registro->email }}</td>
                             <td>{{ $registro->telefone }}</td>
                             <td class="centralizado">
@@ -71,10 +61,10 @@
                                     <i class="bi bi-pencil-square fs-5"></i>
                                 </a>
                                 <a type="button" class="btn btn-danger btn-sm" href="{{ route('autor.delete', $registro->id) }}">
-                                    <i class="bi bi-trash-fill fs-5"> </i> 
+                                    <i class="bi bi-trash-fill fs-5"> </i>
                                 </a>
                                 <a type="button" class="btn btn-info btn-sm" href="{{ route('autor.show', $registro->id) }}">
-                                    <i class="bi bi-search fs-5"> </i> 
+                                    <i class="bi bi-search fs-5"> </i>
                                 </a>
                             </td>
                         </tr>
@@ -85,17 +75,17 @@
                 <div>
                     <!-- class="pagination justify-content-end" -->
                     @if(isset($filter))
-                        {!! $registros->appends([
-                            'filter' => $filter,
-                            'qtdPorPag' => $item
-                            ])->links() !!}
+                    {!! $registros->appends([
+                    'filter' => $filter,
+                    'qtdPorPag' => $item
+                    ])->links() !!}
                     @else
-                        {!! $registros->appends([
-                            'qtdPorPag'=> $item
-                            ])->links() !!}
+                    {!! $registros->appends([
+                    'qtdPorPag'=> $item
+                    ])->links() !!}
                     @endif
                 </div>
-                
+
                 <a type="button" class="btn btn-primary btn-lg" href="{{ route('autor.create')}}">Inclusão de novos autores
                     <i class="bi bi-person-add fs-4"></i>
                 </a>
