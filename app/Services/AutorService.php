@@ -20,6 +20,7 @@ class AutorService implements AutorServiceInterface
     //     $this->repository = $autor;
     //     parent::__construct($autor);
     // }
+    
     private $repository;
     public function __construct(Autor $autor)
     {
