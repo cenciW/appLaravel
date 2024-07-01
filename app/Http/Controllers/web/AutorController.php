@@ -32,7 +32,7 @@ class AutorController extends Controller
         // dd($request->all());
         $registros = $this->service->index($pesquisar, $page);
         //$registros = Autor::paginate(10);
-
+        
         return view('autor.index', [
             'registros' => $registros,
             'pages' => [5, 10, 15, 20],

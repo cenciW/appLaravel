@@ -17,7 +17,7 @@ class AbstractService implements ServiceInterface
     public function index($pesquisar, $page) {
         $registros = $this->repository->paginate($page);
         return ([
-            "registros"=>$registros
+            "registros"=>$registros,
         ]);
     }
     
