@@ -11,8 +11,8 @@ class UserProject extends Model
 
     protected $table = "user_project";
     protected $fillable = [
-        'permission_id',
         'personal_user_id',
+        'is_owner',
         'project_id',
         'dt_admission',
     ];
@@ -20,9 +20,9 @@ class UserProject extends Model
     public function rules()
     {
         return [
-            'permission_id' => 'required',
             'personal_user_id' => 'required',
             'project_id' => 'required',
+            'is_owner'=> 'required',
             'dt_admission' => 'required',
         ];
     }
@@ -35,16 +35,17 @@ class UserProject extends Model
         return $this->belongsTo(PersonalUser::class);
     }
 
-    public function permission()
-    {
-        return $this->belongsTo(Permission::class);
-    }
+    // public function permission()
+    // {
+    //     return $this->belongsTo(Permission::class);
+    // }
 
     public function feedback()
     {
         return [
             'dt_admission' => 'O campo ::attribute é obrigatório',
             'permission_id' => 'O campo ::attribute é obrigatório',
+            'is_owner' => 'o campo ::attribute é obrigatório',
             'user_id' => 'O campo ::attribute é obrigatório',
             'project_id' => 'O campo ::attribute é obrigatório',
         ];

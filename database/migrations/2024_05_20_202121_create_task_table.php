@@ -13,12 +13,22 @@ return new class extends Migration
     {
         Schema::create('task', function (Blueprint $table) {
             $table->increments('id');
+
+            //priority
+            $table->integer('weight');
+
             $table->unsignedInteger('card_id');
             $table->foreign('card_id')->references('id')->on('card')->onDelete('cascade');
-            $table->unsignedInteger('status_task_id');
-            $table->foreign('status_task_id')->references('id')->on('status_task')->onDelete('cascade');
-            $table->unsignedInteger('priority_id');
-            $table->foreign('priority_id')->references('id')->on('priority')->onDelete('cascade');
+            
+            // $table->unsignedInteger('status_task_id');
+            // $table->foreign('status_task_id')->references('id')->on('status_task')->onDelete('cascade');
+            
+            //nao iniciada, andamento, finalizada.
+            $table->integer('status_task');
+            
+            // $table->unsignedInteger('priority_id');
+            // $table->foreign('priority_id')->references('id')->on('priority')->onDelete('cascade');
+            
             $table->string('description');
             $table->date('dt_start');
             $table->date('dt_end');

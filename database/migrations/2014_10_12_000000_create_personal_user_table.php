@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('type_log', function (Blueprint $table) {
+        Schema::create('personal_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type', 45);
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('type_log');
+        Schema::dropIfExists('personal_user');
     }
 };

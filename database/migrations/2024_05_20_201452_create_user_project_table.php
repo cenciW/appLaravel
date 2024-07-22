@@ -12,10 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_project', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             
-            $table->integer('permission_id')->unsigned();
-            $table->foreign('permission_id')->references('id')->on('permission')->onDelete('cascade');
+            //$table->integer('permission_id')->unsigned();
+            //$table->foreign('permission_id')->references('id')->on('permission')->onDelete('cascade');
+            
+            //para tirar a tabela de permissões.
+            
+            $table->boolean('is_owner')->default(false);
+
+            //se o usuário aceitou entrar
+            $table->boolean('confirmed')->default(false);
 
             $table->integer('personal_user_id')->unsigned();
             $table->foreign('personal_user_id')->references('id')->on('personal_user')->onDelete('cascade');

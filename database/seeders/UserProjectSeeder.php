@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Autor;
+use App\Models\UserProject;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class AutorSeeder extends Seeder
+class UserProjectSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Autor::factory(50)->create();
+        UserProject::factory(50)->create();
     }
 }

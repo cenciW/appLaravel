@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('project_log', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('project_id')->unsigned();
-            $table->foreign('project_id')->references('id')->on('project')->onDelete('cascade');
+            //como ja temos a relacao com o user_project nao ha a necessidade de fazer a relacao com project tbm
+            // $table->integer('project_id')->unsigned();
+            // $table->foreign('project_id')->references('id')->on('project')->onDelete('cascade');
 
-            $table->integer('type_log_id')->unsigned();
-            $table->foreign('type_log_id')->references('id')->on('type_log')->onDelete('cascade');
+            // $table->integer('type_log_id')->unsigned();
+            // $table->foreign('type_log_id')->references('id')->on('type_log')->onDelete('cascade');
+            $table->integer('type_log');
 
             $table->integer('user_project_id')->unsigned();
             $table->foreign('user_project_id')->references('id')->on('user_project')->onDelete('cascade');
