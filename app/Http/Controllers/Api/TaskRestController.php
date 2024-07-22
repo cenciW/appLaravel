@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TaskFormRequest;
 use App\Models\Task;
+use App\Services\TaskService;
 use App\Services\TaskServiceInterface;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class TaskRestController extends Controller
 {
     private $service;
 
-    public function __construct(TaskServiceInterface $service)
+    public function __construct(TaskService $service)
     {
         $this->service = $service;
     }

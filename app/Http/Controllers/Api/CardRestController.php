@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CardFormRequest;
 use App\Models\Card;
+use App\Services\CardService;
 use App\Services\CardServiceInterface;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class CardRestController extends Controller
 {
     private $service;
 
-    public function __construct(CardServiceInterface $service)
+    public function __construct(CardService $service)
     {
         $this->service = $service;
     }

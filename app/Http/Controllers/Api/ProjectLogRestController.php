@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectLogFormRequest;
 use App\Models\ProjectLog;
+use App\Services\ProjectLogService;
 use App\Services\ProjectLogServiceInterface;
 use Illuminate\Http\Request;
 class ProjectLogRestController extends Controller
 {
     private $service;
 
-    public function __construct(ProjectLogServiceInterface $service)
+    public function __construct(ProjectLogService $service)
     {
         $this->service = $service;
     }

@@ -27,8 +27,7 @@ class PersonalUserFormRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|unique:autors',
             'password' => 'required',
-            'dt_created' => 'required',
-            'uuid' => 'required',
+            'dt_created' => 'required'
         ];
 
         if ($this->method() == 'PUT') {
@@ -47,8 +46,7 @@ class PersonalUserFormRequest extends FormRequest
             'name' => 'O campo :attribute é obrigatório',
             'email' => 'O campo :attribute é obrigatório',
             'password' => 'O campo :attribute é obrigatório',
-            'dt_created' => 'O campo :attribute é obrigatório',
-            'uuid' => 'O campo :attribute é obrigatório',
+            'dt_created' => 'O campo :attribute é obrigatório'
         ];
     }
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Services\Base\AbstractService;
 
-class TaskService extends AbstractService implements TaskServiceInterface
+class TaskService extends AbstractService 
 {
     protected $repository;
     public function __construct(Task $task)

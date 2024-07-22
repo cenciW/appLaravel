@@ -2,64 +2,45 @@
 
 namespace App\Providers;
 
-use App\Services\AutorService;
-use App\Services\AutorServiceInterface;
-
+use App\Models\PersonalUser;
+use App\Models\ProjectLog;
+use App\Models\UserProject;
 use App\Services\CardService;
-use App\Services\CardServiceInterface;
 
 use App\Services\PersonalUserService;
-use App\Services\PersonalUserServiceInterface;
-
-use App\Services\PriorityService;
-use App\Services\PriorityServiceInterface;
-
 use App\Services\ProjectLogService;
-use App\Services\ProjectLogServiceInterface;
-
 use App\Services\ProjectService;
-use App\Services\ProjectServiceInterface;
-
-use App\Services\RequestService;
-use App\Services\RequestServiceInterface; // Add this line
-
-use App\Services\StatusRequestService;
-use App\Services\StatusRequestServiceInterface;
-
-use App\Services\StatusTaskService;
-use App\Services\StatusTaskServiceInterface;
-
 use App\Services\TaskService;
-use App\Services\TaskServiceInterface;
-
-use App\Services\TypeLogService;
-use App\Services\TypeLogServiceInterface;
-
 use App\Services\UserProjectService;
-use App\Services\UserProjectServiceInterface;
-
-use App\Services\PermissionService;
-use App\Services\PermissionServiceInterface;
-
 use Illuminate\Support\ServiceProvider; // Add
 class ServicesProvider extends ServiceProvider
 {
-    //relacionar Interface com Service
-    public array $bindings = [
-        //do cocao
-        AutorServiceInterface::class => AutorService::class,
+
+    public function register() {
         
-        CardServiceInterface::class => CardService::class,
-        PermissionServiceInterface::class => PermissionService::class,
-        PersonalUserServiceInterface::class => PersonalUserService::class,
-        PriorityServiceInterface::class => PriorityService::class,
-        ProjectLogServiceInterface::class => ProjectLogService::class,
-        ProjectServiceInterface::class => ProjectService::class,
-        StatusRequestServiceInterface::class => StatusRequestService::class,
-        StatusTaskServiceInterface::class => StatusTaskService::class,
-        TaskServiceInterface::class => TaskService::class,
-        TypeLogServiceInterface::class => TypeLogService::class,
-        UserProjectServiceInterface::class => UserProjectService::class,
-        RequestServiceInterface::class => RequestService::class,
-    ];
+        $this->app->bind(CardService::class, function ($app) {
+            return new CardService(new \App\Models\Card);        
+        });
+
+        $this->app->bind(PersonalUserService::class, function ($app) {
+            return new PersonalUserService(new \App\Models\PersonalUser);        
+        });
+
+        $this->app->bind(ProjectLogService::class, function ($app) {
+            return new ProjectLogService(new \App\Models\ProjectLog);        
+        });
+
+        $this->app->bind(ProjectService::class, function ($app) {
+            return new ProjectService(new \App\Models\Project);        
+        });
+
+        $this->app->bind(TaskService::class, function ($app) {
+            return new TaskService(new \App\Models\Task);        
+        });
+
+        $this->app->bind(UserProjectService::class, function ($app) {
+            return new UserProjectService(new \App\Models\UserProject);        
+        });
+
+    }
 }

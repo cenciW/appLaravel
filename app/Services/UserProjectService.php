@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Services\Base\AbstractService;
 
-class UserProjectService extends AbstractService implements UserProjectServiceInterface
+class UserProjectService extends AbstractService
 {
     protected $repository;
     public function __construct(UserProject $userProject)

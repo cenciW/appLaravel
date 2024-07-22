@@ -18,15 +18,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(
-            PermissionServiceInterface::class,
-            PermissionService::class,
-        );
-
-        // $this->app->bind(
-        //     AutorServiceInterface::class,
-        //     AutorService::class,
-        // );
     }
 
     /**

@@ -12,7 +12,7 @@ class PersonalUser extends Model
     protected $table = "personal_user";
 
     protected $fillable = [
-        "name", "email", "password", "dt_created", "uuid"];
+        "name", "email", "password", "dt_created" ];
 
     #definir regras para esse model
     #user rules
@@ -22,8 +22,7 @@ class PersonalUser extends Model
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'dt_created' => 'required',
-            'uuid' => 'required',
+            'dt_created' => 'required'
         ];
     }
 
@@ -33,8 +32,7 @@ class PersonalUser extends Model
             'name' => 'O campo :attribute é obrigatório',
             'email' => 'O campo :attribute é obrigatório',
             'password' => 'O campo :attribute é obrigatório',
-            'dt_created' => 'O campo :attribute é obrigatório',
-            'uuid' => 'O campo :attribute é obrigatório',
+            'dt_created' => 'O campo :attribute é obrigatório'
         ];
     }
 }

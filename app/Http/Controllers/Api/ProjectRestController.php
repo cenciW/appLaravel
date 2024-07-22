@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectFormRequest;
 use App\Models\Project;
+use App\Services\ProjectService;
 use App\Services\ProjectServiceInterface;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class ProjectRestController extends Controller
 {
     private $service;
 
-    public function __construct(ProjectServiceInterface $service)
+    public function __construct(ProjectService $service)
     {
         $this->service = $service;
     }
