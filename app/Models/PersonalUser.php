@@ -20,7 +20,7 @@ class PersonalUser extends Model
     {
         return [
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required | unique:personal_user',
             'password' => 'required'
             // 'dt_created' => 'required'
         ];
