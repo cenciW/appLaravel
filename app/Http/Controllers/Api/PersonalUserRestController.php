@@ -38,33 +38,42 @@ class PersonalUserRestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PersonalUserFormRequest $request)
+    public function save(PersonalUserFormRequest $request)
     {
 
-        return response()->json([
-            'message' => "Teste"
-        ], 200);
-        
-        // $registro = $request->all();
-        // try{
-        //     $this->service->store($registro);
-        //     return response()->json([
-        //         'message' => 'Registro salvo com sucesso',
-        //         'status' => 201,
-        //     ], 201);
-        // }catch(\Exception $e){
-        //     return response()->json([
-        //         'message' => 'Erro ao salvar o registro',
-        //         'status' => 500,
-        //     ], 500);
-        // }
+        $registro = $request->all();
+        try{
+            $this->service->store($registro);
+            return response()->json([
+                'message' => 'Registro salvo com sucesso',
+                'status' => 201,
+            ], 201);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => 'Erro ao salvar o registro',
+                'status' => 500,
+            ], 500);
+        }
     }
 
-    public function save(PersonalUserFormRequest $request) {
-        return response()->json([
-            'message' => "Teste"
-        ], 200);
-    }
+    // public function save(PersonalUserFormRequest $request) {
+    //     $registro = $request->all();
+
+    //     dd("salve");
+
+    //     try{            
+    //         $this->service->store($registro);
+    //         return response()->json([
+    //             'message' => 'Registro salvo com sucesso',
+    //             'status' => 201,
+    //         ], 201);
+    //     }catch(\Exception $e){
+    //         return response()->json([
+    //             'message' => 'Erro ao salvar o registro',
+    //             'status' => 500,
+    //         ], 500);
+    //     }
+    // }
 
     /**
      * Display the specified resource.

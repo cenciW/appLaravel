@@ -23,6 +23,7 @@ class AbstractService implements ServiceInterface
     
     public function store($request) {
         DB::beginTransaction();
+    
         try {
             $registro = $this->repository->create($request);
             DB::commit();

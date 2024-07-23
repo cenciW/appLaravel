@@ -21,8 +21,8 @@ class PersonalUser extends Model
         return [
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required',
-            'dt_created' => 'required'
+            'password' => 'required'
+            // 'dt_created' => 'required'
         ];
     }
 
@@ -31,8 +31,8 @@ class PersonalUser extends Model
         return [
             'name' => 'O campo :attribute é obrigatório',
             'email' => 'O campo :attribute é obrigatório',
-            'password' => 'O campo :attribute é obrigatório',
-            'dt_created' => 'O campo :attribute é obrigatório'
+            'password' => 'O campo :attribute é obrigatório'
+            // 'dt_created' => 'O campo :attribute é obrigatório'
         ];
     }
 }
