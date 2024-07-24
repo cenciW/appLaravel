@@ -28,7 +28,6 @@ class CardRestController extends Controller
         //essa variavel service eu criei no construtor e atribui o valor do model
         // dd($request->all());
         $registros = $this->service->index($pesquisar, $page);
-        //$registros = Autor::paginate(10);
         return response()->json([
             'registro'=> $registros,
             'status'=>200,

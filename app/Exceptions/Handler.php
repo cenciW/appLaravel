@@ -26,5 +26,32 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+
+        $this->renderable(function(EmailExistException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'message' => $e->getMessage(),
+                    'status' => 400,
+                ], 400);
+            }
+        });
+
+        $this->renderable(function(EmailConfirmedException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'message' => $e->getMessage(),
+                    'status' => 400,
+                ], 400);
+            }
+        });
+
+        $this->renderable(function(\Exception $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'message' => $e->getMessage(),
+                    'status' => 500,
+                ], 500);
+            }
+        });
     }
 }

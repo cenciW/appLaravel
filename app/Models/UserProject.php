@@ -15,6 +15,7 @@ class UserProject extends Model
         'is_owner',
         'project_id',
         'dt_admission',
+        'confirmed'
     ];
 
     public function rules()

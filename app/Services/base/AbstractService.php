@@ -27,11 +27,10 @@ class AbstractService implements ServiceInterface
         try {
             $registro = $this->repository->create($request);
             DB::commit();
-            //dd('Criando registro');
             return $registro;
-        } catch (Exception $e) {
+        } catch (Exception $e) {     
             DB::rollBack();
-            return new Exception('Erro ao criar o registro: ' . $e->getMessage());
+            throw new \Exception('Erro ao criar o registro: ' . $e->getMessage(), $e->getCode(), $e);
         }
     }
     

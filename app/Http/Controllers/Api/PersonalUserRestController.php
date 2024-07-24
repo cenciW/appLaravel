@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PersonalUserFormRequest;
 use App\Services\PersonalUserService;
+use App\Mail\ConfirmPersonalUserMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class PersonalUserRestController extends Controller
@@ -23,10 +25,8 @@ class PersonalUserRestController extends Controller
 
         $pesquisar = $request->pesquisar ?? "";
         $page = $request->qtdPorPag ?? 5;
-        //essa variavel service eu criei no construtor e atribui o valor do model
-        // dd($request->all());
+
         $registros = $this->service->index($pesquisar, $page);
-        //$registros = Autor::paginate(10);
         return response()->json([
             'registro'=> $registros,
             'status'=>200,
@@ -38,42 +38,31 @@ class PersonalUserRestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function save(PersonalUserFormRequest $request)
+    public function store(PersonalUserFormRequest $request)
     {
 
         $registro = $request->all();
-        try{
-            $this->service->store($registro);
+        try {
+            $user = $this->service->store($registro);
+
+            $sent = Mail::to($user->email, $user->name)->send(new ConfirmPersonalUserMail([
+                'subject' => 'Confirmação de Cadastro',
+                'message' => 'Clique no link para confirmar seu cadastro',
+                'userId' => $user->id
+            ]));
+
             return response()->json([
-                'message' => 'Registro salvo com sucesso',
-                'status' => 201,
+                'message' => 'Estamos quase lá, um email foi enviado para você confirmar seu cadastro!',
+                'status' => 201
             ], 201);
-        }catch(\Exception $e){
-            return response()->json([
-                'message' => 'Erro ao salvar o registro',
-                'status' => 500,
-            ], 500);
+        } catch(\Exception $e){
+            if ($e->getCode() == 23000) {
+                throw new \App\Exceptions\EmailExistException();
+            }
+
+            throw new \Exception('Ocorreu um erro inesperado' . $e->getMessage());
         }
     }
-
-    // public function save(PersonalUserFormRequest $request) {
-    //     $registro = $request->all();
-
-    //     dd("salve");
-
-    //     try{            
-    //         $this->service->store($registro);
-    //         return response()->json([
-    //             'message' => 'Registro salvo com sucesso',
-    //             'status' => 201,
-    //         ], 201);
-    //     }catch(\Exception $e){
-    //         return response()->json([
-    //             'message' => 'Erro ao salvar o registro',
-    //             'status' => 500,
-    //         ], 500);
-    //     }
-    // }
 
     /**
      * Display the specified resource.
@@ -96,20 +85,10 @@ class PersonalUserRestController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        
-
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
         $registro = $request->all();
         try{
             $this->service->update($registro, $request->id);
@@ -130,6 +109,17 @@ class PersonalUserRestController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->service->destroy($id);
+
+        return response()->json([], 204);
+    }
+
+    public function confirmMail(string $id) {
+        $user = $this->service->confirmMail($id);
+
+        return response()->json([
+            'message' => 'Email confirmado com sucesso',
+            'status' => 200
+        ], 200);
     }
 }

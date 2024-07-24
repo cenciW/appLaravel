@@ -29,9 +29,11 @@ Route::prefix('user')->group(function () {
 
     //url esquerda ----- urn na direita
     //Salvar
-    Route::post('/save', [PersonalUserRestController::class, 'save']);
+    Route::post('/store', [PersonalUserRestController::class, 'store']);
     //update
     Route::put('/update/{id}', [PersonalUserRestController::class, 'update']);
     //Deletar
     Route::delete('/destroy/{id}', [PersonalUserRestController::class, 'destroy']);
+
+    Route::get('/confirm/{id}', [PersonalUserRestController::class, 'confirmMail'])->name('confirm-user');
 });
