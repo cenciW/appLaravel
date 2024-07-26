@@ -13,5 +13,7 @@ class CardService extends AbstractService {
         $this->repository = $card;
         parent::__construct($card);
     }
+
+    //override index
     
 }

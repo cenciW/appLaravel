@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 
 class CardRestController extends Controller
 {
+    // this Controller will do the CRUD of the Card model
+    
     private $service;
 
     public function __construct(CardService $service)
@@ -22,37 +24,34 @@ class CardRestController extends Controller
      */
     public function index(Request $request)
     {
-        //
         $pesquisar = $request->pesquisar ?? "";
         $page = $request->qtdPorPag ?? 5;
-        //essa variavel service eu criei no construtor e atribui o valor do model
-        // dd($request->all());
+
         $registros = $this->service->index($pesquisar, $page);
         return response()->json([
             'registro'=> $registros,
             'status'=>200,
             ],200
-        );
+        );        
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(CardFormRequest $request)
     {
-        
+
         $registro = $request->all();
-        try{
-            $this->service->store($registro);
+        try {
+            $user = $this->service->store($registro);
+
             return response()->json([
-                'message' => 'Registro salvo com sucesso',
-                'status' => 201,
+                'message' => 'Card criado com sucesso.',
+                'status' => 201
             ], 201);
-        }catch(\Exception $e){
-            return response()->json([
-                'message' => 'Erro ao salvar o registro',
-                'status' => 500,
-            ], 500);
+        } catch(\Exception $e){
+            throw new \Exception('Ocorreu um erro inesperado' . $e->getMessage());
         }
     }
 
@@ -61,16 +60,19 @@ class CardRestController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $registro = $this->service->show($id);
         
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        try{
+            return response()->json([
+                'registro' => $registro,
+                'status' => 200,
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => 'Erro ao mostrar o registro',
+                'status' => 500,
+            ], 500);
+        }        
     }
 
     /**
@@ -78,7 +80,6 @@ class CardRestController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
         $registro = $request->all();
         try{
             $this->service->update($registro, $request->id);
@@ -99,6 +100,9 @@ class CardRestController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->service->destroy($id);
+
+        return response()->json([], 204);
     }
+
 }
