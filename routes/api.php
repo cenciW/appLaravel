@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\PersonalUserRestController;
+use App\Http\Controllers\Api\TaskRestController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,4 +37,21 @@ Route::prefix('user')->group(function () {
     Route::delete('/destroy/{id}', [PersonalUserRestController::class, 'destroy']);
 
     Route::get('/confirm/{id}', [PersonalUserRestController::class, 'confirmMail'])->name('confirm-user');
+});
+
+Route::prefix('task')->group(function () { 
+
+    //Chamando rota para usar o controller.
+    //Listar geral
+    Route::any('/get', [TaskRestController::class, 'get']);
+    //Listar com id
+    Route::get('/getById/{id}', [TaskRestController::class, 'getById']);
+
+    //url esquerda ----- urn na direita
+    //Salvar
+    Route::post('/post', [TaskRestController::class, 'post']);
+    //update
+    Route::put('/put/{id}', [TaskRestController::class, 'put']);
+    //Deletar
+    Route::delete('/delete/{id}', [TaskRestController::class, 'delete']);
 });
