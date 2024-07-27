@@ -113,5 +113,8 @@ class ProjectRestController extends Controller
     public function delete(string $id)
     {
         //
+        $this->service->destroy($id);
+
+        return response()->json([], 204);
     }
 }

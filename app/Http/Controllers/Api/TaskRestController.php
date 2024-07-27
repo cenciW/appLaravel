@@ -112,18 +112,8 @@ class TaskRestController extends Controller
      */
     public function delete(string $id)
     {
-        /* Arruma as execões JADIR*/
-        try{
-            $this->service->destroy($id);
-            return response()->json([
-                'message'=> 'Registro deletado com sucesso',
-                'status'=> 200,
-                ], 200);
-        }catch(\Exception $e){
-            return response()->json([
-                'message'=> 'Erro ao deletar o registro',
-                'status'=> 500,
-                ], 500);
-        }
+        $this->service->destroy($id);
+
+        return response()->json([], 204);
     }
 }
