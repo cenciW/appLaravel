@@ -22,7 +22,7 @@ class CardRestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function get(Request $request)
     {
         $pesquisar = $request->pesquisar ?? "";
         $page = $request->qtdPorPag ?? 5;
@@ -39,7 +39,7 @@ class CardRestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CardFormRequest $request)
+    public function post(CardFormRequest $request)
     {
 
         $registro = $request->all();
@@ -58,7 +58,7 @@ class CardRestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function getById(string $id)
     {
         $registro = $this->service->show($id);
         
@@ -78,7 +78,7 @@ class CardRestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function put(Request $request, string $id)
     {
         $registro = $request->all();
         try{
@@ -98,7 +98,7 @@ class CardRestController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
         $this->service->destroy($id);
 

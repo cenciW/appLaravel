@@ -20,7 +20,7 @@ class ProjectRestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function get(Request $request)
     {
         //
         $pesquisar = $request->pesquisar ?? "";
@@ -39,7 +39,7 @@ class ProjectRestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProjectFormRequest $request)
+    public function post(ProjectFormRequest $request)
     {
         
         $registro = $request->all();
@@ -60,7 +60,7 @@ class ProjectRestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function getById(string $id)
     {
         //
         $registro = $this->service->show($id);
@@ -89,7 +89,7 @@ class ProjectRestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function put(Request $request, string $id)
     {
         //
         $registro = $request->all();
@@ -110,7 +110,7 @@ class ProjectRestController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
         //
     }
