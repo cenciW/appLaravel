@@ -112,7 +112,7 @@ class TaskRestController extends Controller
      */
     public function delete(string $id)
     {
-        //
+        /* Arruma as execões JADIR*/
         try{
             $this->service->destroy($id);
             return response()->json([

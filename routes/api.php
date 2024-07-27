@@ -24,17 +24,17 @@ Route::prefix('user')->group(function () {
 
     //Chamando rota para usar o controller.
     //Listar geral
-    Route::any('/index', [PersonalUserRestController::class, 'index']);
+    Route::any('/get', [PersonalUserRestController::class, 'get']);
     //Listar com id
-    Route::get('/show/{id}', [PersonalUserRestController::class, 'show']);
+    Route::get('/getById/{id}', [PersonalUserRestController::class, 'getById']);
 
     //url esquerda ----- urn na direita
     //Salvar
-    Route::post('/store', [PersonalUserRestController::class, 'store']);
+    Route::post('/post', [PersonalUserRestController::class, 'post']);
     //update
-    Route::put('/update/{id}', [PersonalUserRestController::class, 'update']);
+    Route::put('/put/{id}', [PersonalUserRestController::class, 'put']);
     //Deletar
-    Route::delete('/destroy/{id}', [PersonalUserRestController::class, 'destroy']);
+    Route::delete('/delete/{id}', [PersonalUserRestController::class, 'delete']);
 
     Route::get('/confirm/{id}', [PersonalUserRestController::class, 'confirmMail'])->name('confirm-user');
 });
