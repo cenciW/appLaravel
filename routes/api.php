@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\PersonalUserRestController;
+use App\Http\Controllers\Api\ProjectRestController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,4 +37,26 @@ Route::prefix('user')->group(function () {
     Route::delete('/destroy/{id}', [PersonalUserRestController::class, 'destroy']);
 
     Route::get('/confirm/{id}', [PersonalUserRestController::class, 'confirmMail'])->name('confirm-user');
+});
+
+
+Route::prefix('project')->group(function () { 
+
+    //Chamando rota para usar o controller.
+    //Listar geral
+    Route::any('/index', [ProjectRestController::class, 'index']);
+
+    
+    //Listar com id
+    Route::get('/show/{id}', [ProjectRestController::class, 'show']);
+
+    
+    //Salvar
+    Route::post('/store', [ProjectRestController::class, 'store']);
+    
+    //update
+    Route::put('/update/{id}', [ProjectRestController::class, 'update']);
+
+    //Deletar
+    Route::delete('/destroy/{id}', [ProjectRestController::class, 'destroy']);
 });

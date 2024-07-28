@@ -44,16 +44,16 @@ class AbstractService implements ServiceInterface
     }
     
     public function update($request, string $id) {
-        $data = $this->repository->find($id);
-
-        DB::beginTransaction();
         try {
+            $data = $this->repository->find($id);
+    
+            DB::beginTransaction();
             $registro = $data->update($request);
             DB::commit();
             return $registro;
         } catch (Exception $e) {
             DB::rollBack();
-            return new Exception('Erro ao criar o registro: ' . $e->getMessage());
+            throw new Exception('Erro ao atualizar o registro: ' . $e->getMessage());
         }
     }
 
@@ -67,7 +67,7 @@ class AbstractService implements ServiceInterface
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
-            return new Exception('Erro ao excluir o registro: ' . $e->getMessage());
+            throw new Exception('Erro ao excluir o registro: ' . $e->getMessage());
         }
     }
 
