@@ -20,7 +20,7 @@ class TaskRestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function get(Request $request)
     {
         //
         $pesquisar = $request->pesquisar ?? "";
@@ -39,7 +39,7 @@ class TaskRestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TaskFormRequest $request)
+    public function post(TaskFormRequest $request)
     {
         
         $registro = $request->all();
@@ -60,7 +60,7 @@ class TaskRestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function getById(string $id)
     {
         //
         $registro = $this->service->show($id);
@@ -81,15 +81,15 @@ class TaskRestController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    // public function edit(string $id)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function put(Request $request, string $id)
     {
         //
         $registro = $request->all();
@@ -110,8 +110,10 @@ class TaskRestController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
-        //
+        $this->service->destroy($id);
+
+        return response()->json([], 204);
     }
 }

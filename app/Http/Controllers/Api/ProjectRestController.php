@@ -17,17 +17,10 @@ class ProjectRestController extends Controller
     {
         $this->service = $service;
     }
-
-
-    /*
-        FEATURES PARA IMPLEMENTAR NO CADASTRO DO PROJETO:
-
-        - Criar exceção para quando o projeto 
-
-
-    */
-
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function get(Request $request)
     {
         $pesquisar = $request->pesquisar ?? "";
         $page = $request->qtdPorPag ?? 5;
@@ -44,7 +37,7 @@ class ProjectRestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProjectFormRequest $request)
+    public function post(ProjectFormRequest $request)
     {
         
         $registro = $request->all();
@@ -65,7 +58,7 @@ class ProjectRestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function getById(string $id)
     {
         //
         $registro = $this->service->show($id);
@@ -86,7 +79,7 @@ class ProjectRestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function put(Request $request, string $id)
     {
         $registro = $request->all();
         try{
@@ -103,8 +96,9 @@ class ProjectRestController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
+        //
         $this->service->destroy($id);
 
         return response()->json([], 204);
