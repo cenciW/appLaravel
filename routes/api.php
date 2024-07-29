@@ -135,6 +135,13 @@ Route::prefix('user_project')->group(function () {
     Route::put('/put/{id}', [UserProjectRestController::class, 'put']);
     //Deletar
     Route::delete('/delete/{id}', [UserProjectRestController::class, 'delete']);
+
+    //Projeto Específico de um User
+    Route::get('/{id}/project/{project_id}', [UserProjectRestController::class,'getProjectByUserId']);
+
+    //Lista dos projetos de um User
+    Route::get('/{id}/projects', [UserProjectRestController::class,'getUserProjects']);
+
 });
 
 #endregion

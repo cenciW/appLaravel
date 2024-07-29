@@ -100,4 +100,31 @@ class UserProjectRestController extends Controller
 
         return response()->json([], 204);
     }
+
+    public function getProjectById(string $id, string $project_id) {
+        
+        try {
+            $data = $this->service->getProjectById($id, $project_id);
+            return response()->json([
+                'data'=> $data,
+            ]);
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        } 
+    }
+
+
+    public function getUserProjects(string $id) {
+
+        try {
+            $data = $this->service->getUserProjects($id);
+            return response()->json([
+                'data'=> $data,
+            ]);
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        } 
+    }
 }

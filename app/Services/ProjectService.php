@@ -26,6 +26,7 @@ class ProjectService extends AbstractService
             throw new \Exception('Erro ao buscar os cards do projeto: ' . $e->getMessage(), $e->getCode(), $e);
         }
     }
+
     //Talvez fazer um filtro para buscar por projetos: 
     /*
         - Finalizados
