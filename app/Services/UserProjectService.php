@@ -21,20 +21,40 @@ class UserProjectService extends AbstractService
 
     public function getUserProjects($id) {
         try {
-            
-            $project = $this->repository
-                ->join('project', 'project.id', '=', 'user_project.project_id')
-                ->where('user_project.personal_user_id', $id)
-                ->select('project.*', 'user_project.confirmed')->get();
-            
-            $user = $this->repository
-                ->join('personal_user', 'personal_user.id', '=', 'user_project.personal_user_id')
-                ->where('user_project.personal_user_id', $id)
-                ->select('personal_user.id', 'personal_user.name', 'personal_user.email')->get()->first();
-            
+            $results = $this->repository
+            ->join('project', 'project.id', '=', 'user_project.project_id')
+            ->join('personal_user', 'personal_user.id', '=', 'user_project.personal_user_id')
+            ->where('user_project.personal_user_id', $id)
+            ->select('personal_user.id as user_id', 'personal_user.name', 'personal_user.email', 'project.*', 'user_project.confirmed')
+            ->get();
+
+            // Verifica se resultados foram encontrados
+            if ($results->isEmpty()) {
+                return null; // Ou pode lançar uma exceção ou retornar uma resposta apropriada
+            }
+
+            // Extraia os dados do usuário
+            $user = [
+                'id' => $results[0]->user_id,
+                'name' => $results[0]->name,
+                'email' => $results[0]->email,
+            ];
+
+            // Extraia os projetos
+            $projects = $results->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'name' => $item->name,
+                    'description' => $item->description,
+                    'confirmed' => $item->confirmed,
+                    // Adicione outros campos do projeto conforme necessário
+                ];
+            })->toArray();
+
+            // Retorne os dados formatados
             return [
-                'project'=> $project,
-                'user'=> $user
+                'user' => $user,
+                'projects' => $projects
             ];
         } catch(\Exception $e) {
         
@@ -42,7 +62,7 @@ class UserProjectService extends AbstractService
         }
     }
 
-    public function getProjectById($id, $project_id) {
+    public function getProjectByUserId($id, $project_id) {
 
         try {
             

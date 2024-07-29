@@ -101,10 +101,10 @@ class UserProjectRestController extends Controller
         return response()->json([], 204);
     }
 
-    public function getProjectById(string $id, string $project_id) {
+    public function getProjectByUserId(string $id, string $project_id) {
         
         try {
-            $data = $this->service->getProjectById($id, $project_id);
+            $data = $this->service->getProjectByUserId($id, $project_id);
             return response()->json([
                 'data'=> $data,
             ]);
