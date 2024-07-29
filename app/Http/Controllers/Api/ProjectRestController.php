@@ -104,20 +104,6 @@ class ProjectRestController extends Controller
         return response()->json([], 204);
     }
 
-    public function createCard(Request $request) 
-    {
-        $registro = $request->all();
-        try{
-            $this->service->createCard($registro);
-            return response()->json([
-                'message'=> 'Card criado com sucesso',
-                'status'=> 200,
-                ], 200);
-        }catch(\Exception $e){
-            throw new \Exception('Erro ao criar o card');         
-        }
-    }
-
     public function getCards(string  $id)
     {
 

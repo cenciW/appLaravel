@@ -28,11 +28,6 @@ class UserProjectService extends AbstractService
             ->select('personal_user.id as user_id', 'personal_user.name', 'personal_user.email', 'project.*', 'user_project.confirmed')
             ->get();
 
-            // Verifica se resultados foram encontrados
-            if ($results->isEmpty()) {
-                return null; // Ou pode lançar uma exceção ou retornar uma resposta apropriada
-            }
-
             // Extraia os dados do usuário
             $user = [
                 'id' => $results[0]->user_id,
@@ -58,7 +53,7 @@ class UserProjectService extends AbstractService
             ];
         } catch(\Exception $e) {
         
-            return new \Exception();
+            return new \Exception('Erro ao buscar os projetos');
         }
     }
 
@@ -66,13 +61,14 @@ class UserProjectService extends AbstractService
 
         try {
             
-            
+            //Depois arrumar para fazer com apenas um select
             $project = $this->repository
                 ->join('project', 'project.id', '=', 'user_project.project_id')
+                ->join('personal_user', 'personal_user.id', '=', 'user_project.personal_user_id')
                 ->where('user_project.personal_user_id', $id)
                 ->where('user_project.project_id', $project_id)
-                ->select('project.*', 'user_project.confirmed')->get()->first();
-            
+                ->select('project.*', 'user_project.confirmed', 'personal_user.*')->get()->first();
+
             $user = $this->repository
                 ->join('personal_user', 'personal_user.id', '=', 'user_project.personal_user_id')
                 ->where('user_project.personal_user_id', $id)
@@ -83,9 +79,35 @@ class UserProjectService extends AbstractService
                 'project'=> $project,
                 'user'=> $user
             ];
+
         } catch(\Exception $e) {
         
-            return new \Exception();
+            throw new \Exception('Erro ao buscar o projeto');
         }
+    }
+
+    public function confirmProject($id, $project_id) {
+
+        try {
+
+            $user_project = $this->repository->where('id', $id)->where('project_id', $project_id)->first();
+
+            if (!$user_project) {
+                throw new ModelNotFoundException('Usuário não encontrado');
+            }
+
+            if ($user_project->confirmed) {
+                throw new \App\Exceptions\EmailConfirmedException('Email já confirmado');
+            }
+
+            $user_project->confirmed = true;
+            $user_project->save();
+
+            return $user_project;
+
+        } catch (\Exception $e) {
+            throw new \Exception('Erro ao confirmar o projeto');
+        }
+
     }
 }
