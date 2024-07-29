@@ -59,6 +59,18 @@ class ProjectService extends AbstractService
         }
     }
 
+    public function getCardById ($id, $card_id) {
+        try{
+            $card = $this->repository->join('card', 'card.project_id', '=', 'project.id')->where('project.id', $id)->where('card.id', $card_id)->get()->first();
+
+            return $card;
+        }
+        catch(\Exception $e){
+            throw new \Exception('Erro ao buscar os cards do projeto: ' . $e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+
     //Talvez fazer um filtro para buscar por projetos: 
     /*
         - Finalizados
