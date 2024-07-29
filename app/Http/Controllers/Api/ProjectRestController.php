@@ -132,7 +132,7 @@ class ProjectRestController extends Controller
         }
     }
 
-    public function cardById(Request $request)
+    public function cardById(string $id)
     {
 
     }
