@@ -113,18 +113,7 @@ Route::prefix('project')->group(function () {
 
     Route::get('/{id}/cards', [ProjectRestController::class, 'getCards']);
 
-<<<<<<< HEAD
-    Route::get('/cards/{id}', [ProjectRestController::class, 'cardsById']);
-    
-    //get tasks from card from project
-    Route::get('{id}/card/{card_id}/tasks', [ProjectRestController::class,'getCardTasks']);
-    
-    //get task by id from card from project
-    Route::get('{id}/card/{card_id}/tasks/{task_id}', [ProjectRestController::class,'getCardTaskById']);
-
-=======
     Route::get('/{id}/cards/{card_id}', [ProjectRestController::class, 'getCardById']);
->>>>>>> c85b32d60cf4da76acfd6a50e6874b37402373c2
 });
 
 #endregion
