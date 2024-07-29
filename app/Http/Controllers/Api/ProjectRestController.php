@@ -132,8 +132,30 @@ class ProjectRestController extends Controller
         }
     }
 
-    public function cardById(Request $request)
-    {
 
+    public function getCardTasks(string $id, string $card_id)
+    {
+        try{
+            $tasks = $this->service->getCardTasks($id, $card_id);
+            return response()->json([
+                'tasks'=> $tasks,
+                'status'=> 200,
+                ], 200);
+        }catch(\Exception $e){
+            throw new \Exception('Erro ao mostrar as tarefas do card');         
+        }
+
+    }
+
+    public function getCardTaskById(string $id, string $card_id, string $task_id) {
+        try{
+            $tasks = $this->service->getCardTaskById($id, $card_id, $task_id);
+            return response()->json([
+                'tasks'=> $tasks,
+                'status'=> 200,
+                ], 200);
+        }catch(\Exception $e){
+            throw new \Exception('Erro ao mostrar a tarefa do card');         
+        }        
     }
 }
