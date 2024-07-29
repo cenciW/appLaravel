@@ -22,13 +22,11 @@ class ProjectRestController extends Controller
      */
     public function get(Request $request)
     {
-        //
         $pesquisar = $request->pesquisar ?? "";
         $page = $request->qtdPorPag ?? 5;
-        //essa variavel service eu criei no construtor e atribui o valor do model
-        // dd($request->all());
         $registros = $this->service->index($pesquisar, $page);
-        //$registros = Autor::paginate(10);
+
+
         return response()->json([
             'registro'=> $registros,
             'status'=>200,
@@ -79,19 +77,10 @@ class ProjectRestController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function put(Request $request, string $id)
     {
-        //
         $registro = $request->all();
         try{
             $this->service->update($registro, $request->id);
@@ -100,10 +89,7 @@ class ProjectRestController extends Controller
                 'status'=> 200,
                 ], 200);
         }catch(\Exception $e){
-            return response()->json([
-                'message'=> 'Erro ao atualizar o registro',
-                'status'=> 500,
-                ], 500);
+            throw new \Exception('Erro ao atualizar o registro');
         }
     }
 

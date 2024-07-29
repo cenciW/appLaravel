@@ -25,8 +25,8 @@ class UserProjectRestController extends Controller
         //
         $pesquisar = $request->pesquisar ?? "";
         $page = $request->qtdPorPag ?? 5;
-        //essa variavel service eu criei no construtor e atribui o valor do model
-        // dd($request->all());
+
+
         $registros = $this->service->index($pesquisar, $page);
         //$registros = Autor::paginate(10);
         return response()->json([
@@ -36,9 +36,7 @@ class UserProjectRestController extends Controller
         );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function post(UserProjectFormRequest $request)
     {
         
@@ -57,12 +55,10 @@ class UserProjectRestController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function getById(string $id)
     {
-        //
+
         $registro = $this->service->show($id);
         
         try{
@@ -76,14 +72,6 @@ class UserProjectRestController extends Controller
                 'status' => 500,
             ], 500);
         }  
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -106,13 +94,8 @@ class UserProjectRestController extends Controller
                 ], 500);
         }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function delete(string $id)
     {
-        //
         $this->service->destroy($id);
 
         return response()->json([], 204);
