@@ -132,8 +132,16 @@ class ProjectRestController extends Controller
         }
     }
 
-    public function cardById(string $id)
+    public function getCardById(string $id, string $card_id)
     {
-
+        try{
+            $card = $this->service->getCardById($id, $card_id);
+            return response()->json([
+                'card'=> $card,
+                'status'=> 200,
+                ], 200);
+        }catch(\Exception $e){
+            throw new \Exception('Erro ao mostrar o card');         
+        }
     }
 }

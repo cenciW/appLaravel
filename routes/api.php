@@ -113,7 +113,7 @@ Route::prefix('project')->group(function () {
 
     Route::get('/{id}/cards', [ProjectRestController::class, 'getCards']);
 
-    Route::get('/cards/{id}', [ProjectRestController::class, 'cardsById']);
+    Route::get('/{id}/cards/{card_id}', [ProjectRestController::class, 'getCardById']);
 });
 
 #endregion
