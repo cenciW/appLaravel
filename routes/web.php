@@ -18,3 +18,4 @@ use App\Http\Controllers\ProjectController;
  */
 
 Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
+

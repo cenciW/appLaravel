@@ -43,6 +43,8 @@ Route::prefix('user')->group(function () {
     Route::delete('/delete/{id}', [PersonalUserRestController::class, 'delete']);
 
     Route::get('/confirm/{id}', [PersonalUserRestController::class, 'confirmMail'])->name('confirm-user');
+
+
 });
 
 #endregion
@@ -106,6 +108,12 @@ Route::prefix('project')->group(function () {
     Route::put('/put/{id}', [ProjectRestController::class, 'put']);
     //Deletar
     Route::delete('/delete/{id}', [ProjectRestController::class, 'delete']);
+
+    Route::post('/project/{project_id}/create_card', [ProjectRestController::class, 'createCard']);
+
+    Route::get('/cards', [ProjectRestController::class, 'cards']);
+
+    Route::get('/cards/{id}', [ProjectRestController::class, 'cardsById']);
 });
 
 #endregion

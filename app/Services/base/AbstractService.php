@@ -57,7 +57,6 @@ class AbstractService implements ServiceInterface
         }
     }
 
-
     public function destroy($id) {
         $data = $this->show($id);
 

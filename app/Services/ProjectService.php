@@ -15,6 +15,12 @@ class ProjectService extends AbstractService
     }
 
 
+    public function getCards ($id) 
+    {
+        $this->repository->find($id);
+
+        return ;
+    }
     //Talvez fazer um filtro para buscar por projetos: 
     /*
         - Finalizados
