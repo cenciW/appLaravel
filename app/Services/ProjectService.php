@@ -17,9 +17,14 @@ class ProjectService extends AbstractService
 
     public function getCards ($id) 
     {
-        $this->repository->find($id);
+        try{
+            $card = $this->repository->join('card', 'card.project_id', '=', 'project.id')->where('project.id', $id)->get();
 
-        return ;
+            return $card;
+        }
+        catch(\Exception $e){
+            throw new \Exception('Erro ao buscar os cards do projeto: ' . $e->getMessage(), $e->getCode(), $e);
+        }
     }
     //Talvez fazer um filtro para buscar por projetos: 
     /*

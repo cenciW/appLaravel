@@ -109,9 +109,9 @@ Route::prefix('project')->group(function () {
     //Deletar
     Route::delete('/delete/{id}', [ProjectRestController::class, 'delete']);
 
-    Route::post('/project/{project_id}/create_card', [ProjectRestController::class, 'createCard']);
+    Route::post('/{project_id}/create_card', [ProjectRestController::class, 'createCard']);
 
-    Route::get('/cards', [ProjectRestController::class, 'cards']);
+    Route::get('/{id}/cards', [ProjectRestController::class, 'getCards']);
 
     Route::get('/cards/{id}', [ProjectRestController::class, 'cardsById']);
 });
