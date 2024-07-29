@@ -120,7 +120,7 @@ class ProjectRestController extends Controller
 
     public function card(Request $request, string  $id)
     {
-        $this->service->
+        // $this->service->
     }
 
     public function cardById(Request $request)

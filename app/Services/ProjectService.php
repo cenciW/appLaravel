@@ -21,6 +21,7 @@ class ProjectService extends AbstractService
 
         return ;
     }
+
     //Talvez fazer um filtro para buscar por projetos: 
     /*
         - Finalizados
