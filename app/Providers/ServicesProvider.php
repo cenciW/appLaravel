@@ -39,7 +39,7 @@ class ServicesProvider extends ServiceProvider
         });
 
         $this->app->bind(UserProjectService::class, function ($app) {
-            return new UserProjectService(new \App\Models\UserProject);        
+            return new UserProjectService(new \App\Models\UserProject, $app->make(PersonalUserService::class));
         });
 
     }

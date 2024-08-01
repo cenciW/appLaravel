@@ -145,9 +145,18 @@ Route::prefix('user_project')->group(function () {
 
     //Projeto Específico de um User
     Route::get('/{id}/project/{project_id}', [UserProjectRestController::class,'getProjectByUserId']);
-
+    
+    
     //Lista dos projetos de um User
     Route::get('/{id}/projects', [UserProjectRestController::class,'getUserProjects']);
+    
+    
+    
+    //Convida usuários para o projeto
+    Route::post('/invite/{id}', [UserProjectRestController::class,'inviteMailsForProject']);
+
+    //Confirma o usuário dentro de um projeto
+    Route::get('/confirm/{id_user}/{id_project}', [UserProjectRestController::class, 'confirmUserProject'])->name('confirm-user-project');
 
 });
 

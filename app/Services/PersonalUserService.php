@@ -37,4 +37,8 @@ class PersonalUserService extends AbstractService
 
     }
 
+    public function showByEmail($email) {
+        return $this->repository->where('email', $email)->first();
+    }
+
 }

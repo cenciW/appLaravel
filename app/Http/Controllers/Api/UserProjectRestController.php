@@ -127,4 +127,24 @@ class UserProjectRestController extends Controller
             throw new \Exception($e->getMessage());
         } 
     }
+
+    public function confirmUserProject(string $id_user, string $project_id) {
+        $user = $this->service->confirmProject($id_user, $project_id);
+
+        return response()->json([
+            'message' => 'Email confirmado com sucesso',
+            'user' => $user,
+            'status' => 200
+        ], 200);
+    }
+
+    public function inviteMailsForProject(Request $request, string $id) {
+        $data = $request->all();
+        $this->service->inviteMailsForProject($data, $id);
+
+        return response()->json([
+            'message' => 'Emails enviados com sucesso',
+            'status' => 200
+        ], 200);
+    }
 }
